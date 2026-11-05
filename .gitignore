@@ -1,0 +1,24 @@
+# macOS
+.DS_Store
+._*
+
+# Python
+__pycache__/
+*.pyc
+*$py.class
+
+# LaTeX build artefacts
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# Editor / tooling
+.claude/
+.vscode/
+
+# Embargoed - must not be published. Remove this line only when the
+# University of Porto embargo on the PhD thesis is lifted.
+assets/thesis-phd-fourier-qualia-space.pdf

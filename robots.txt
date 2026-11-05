@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sml-pereira.github.io/sitemap.xml

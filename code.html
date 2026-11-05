@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <title>Code &mdash; Samuel Pereira</title>
+    <meta name="description" content="Software and creative-coding projects by Samuel Pereira, including tools for harmonic analysis, Pure Data patches, and Python applications.">
+    <link rel="canonical" href="https://sml-pereira.github.io/code.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Samuel Pereira">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:url" content="https://sml-pereira.github.io/code.html">
+    <meta property="og:title" content="Code &mdash; Samuel Pereira">
+    <meta property="og:description" content="Software and creative-coding projects by Samuel Pereira, including tools for harmonic analysis, Pure Data patches, and Python applications.">
+    <meta property="og:image" content="https://sml-pereira.github.io/assets/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Figure from Samuel Pereira’s research on harmonic quality in Fourier space.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Code &mdash; Samuel Pereira">
+    <meta name="twitter:description" content="Software and creative-coding projects by Samuel Pereira, including tools for harmonic analysis, Pure Data patches, and Python applications.">
+    <meta name="twitter:image" content="https://sml-pereira.github.io/assets/images/og-image.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400;0,600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="favicon/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="favicon/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <script>
+        (function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();
+    </script>
+</head>
+<body>
+
+    <nav class="site-nav">
+        <div class="container">
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html" class="site-nav__brand" aria-label="Samuel Pereira — home">SP</a>
+            <ul class="site-nav__links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="compositions.html">Compositions</a></li>
+                <li><a href="code.html" class="active">Code</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="site-nav__toggle-item"><button class="theme-toggle" aria-label="Toggle dark mode"></button></li>
+            </ul>
+        </div>
+        <div class="site-nav__overlay"></div>
+    </nav>
+
+    <main>
+        <div class="container">
+
+            <header class="page-header page-header--tight">
+                <h1>Code</h1>
+                <canvas id="trajectory-canvas" class="trajectory-canvas trajectory-canvas--column" aria-hidden="true"></canvas>
+            </header>
+
+            <section class="section">
+                <p>
+                    Tools, patches, and experiments, most built to answer a specific research question, a few built because the question seemed interesting enough on its own. The two research repositories below are also listed, with their full citation details, in the <a href="research.html#software">Software &amp; Data section of the Research tab</a>.
+                </p>
+            </section>
+
+            <!-- Qualia Syntax -->
+            <section class="section">
+                <div class="code-card">
+                    <div class="code-card__header">
+                        <h2 class="code-card__name">Qualia Syntax (2026)</h2>
+                        <a href="https://github.com/sml-pereira/qualia-syntax" class="code-card__github" aria-label="GitHub repository for Qualia Syntax">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                        </a>
+                    </div>
+                    <span class="tag tag--tech">Python</span>
+                    <span class="tag tag--tech">Markov models</span>
+                    <span class="tag tag--tech">Hierarchical clustering</span>
+                    <p class="code-card__desc">
+                        The complete analysis pipeline for the article <em>Statistically Modelling Qualia Syntax Through Fourier Space</em>. The code implements distance-sensitive and windowed segmentation strategies, projection into the Fourier Qualia Space, first-order transition matrices, Ward-linkage clustering, and Zipf regressions over the resulting qualia progressions. A separate test suite re-runs the study under varied ambiguity radii and segmentation parameters to establish how far the findings hold. Includes per-composer transition counts and dendrograms for 28 composers, from the Baroque to the early twentieth century.
+                    </p>
+                    <p class="code-card__status">MIT (code) and CC BY 4.0 (data) &mdash; archived on Zenodo, <a href="https://doi.org/10.5281/zenodo.19429590">doi:10.5281/zenodo.19429590</a>.</p>
+                </div>
+            </section>
+
+            <!-- Fourier Qualia Space -->
+            <section class="section">
+                <div class="code-card">
+                    <div class="code-card__header">
+                        <h2 class="code-card__name">Fourier Qualia Space (2026)</h2>
+                        <a href="https://github.com/sml-pereira/phd-fqs" class="code-card__github" aria-label="GitHub repository for Fourier Qualia Space">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                        </a>
+                    </div>
+                    <span class="tag tag--tech">Python</span>
+                    <span class="tag tag--tech">DFT &amp; RadViz</span>
+                    <span class="tag tag--tech">Corpus analysis</span>
+                    <p class="code-card__desc">
+                        The analytical toolkit behind my doctoral thesis: a Python codebase that projects pitch-class sets onto the Fourier Qualia Space. It also ships two interactive visualisers for (1) exploring how DFT coefficients capture pitch-class collections, and (2) for navigating set classes directly in the FQS, as well asa reader for the Yale Classical Archives Corpus, a qualia-progression pipeline with configurable segmentation, entropy of Fourier coefficients computation, and the experiments used to settle which ordering of DFT coefficients the space should adopt.
+                    </p>
+                    <p class="code-card__status">MIT (code) and CC BY 4.0 (data) &mdash; archived on Zenodo, <a href="https://doi.org/10.5281/zenodo.19429566">doi:10.5281/zenodo.19429566</a>.</p>
+                </div>
+            </section>
+
+            <!-- PhD Thesis LaTeX -->
+            <section class="section">
+                <div class="code-card">
+                    <div class="code-card__header">
+                        <h2 class="code-card__name">PhD Thesis (LaTeX) (2026)</h2>
+                    </div>
+                    <span class="tag tag--tech">LaTeX</span>
+                    <span class="tag tag--tech">Tufte-book document class</span>
+                    <p class="code-card__desc">
+                        The LaTeX source of my doctoral thesis <em>The Fourier Qualia Space: Interaction, Ambiguity, and Hierarchy in Music Harmony</em>. Will be published as an open repository after the embargo period.
+                    </p>
+                    <p class="code-card__status"><em>Forthcoming &mdash; available after the embargo period</em></p>
+                </div>
+            </section>
+
+            <!-- Spherical Phase Space -->
+            <section class="section">
+                <div class="code-card">
+                    <div class="code-card__header">
+                        <h2 class="code-card__name">Spherical Phase Space (2020)</h2>
+                        <a href="https://github.com/sml-pereira/spherical-phase-space" class="code-card__github" aria-label="GitHub repository for Spherical Phase Space">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                        </a>
+                    </div>
+                    <span class="tag tag--tech">Processing sketch</span>
+                    <span class="tag tag--tech">Python</span>
+                    <p class="code-card__desc">
+                        An interactive 3D visualisation system that maps the harmonic content of Schoenberg's Op. 19/3 onto a sphere through latitude and longitude coordinates, using phase information from two DFT coefficients. Chords are represented as points on the sphere's surface and K-means clustering identifies harmonic regions and movement patterns across the piece.
+                    </p>
+                    <div class="video-embed">
+                        <iframe src="https://player.vimeo.com/video/1181644304?dnt=1"
+                                title="Spherical Phase Space &mdash; video demonstration"
+                                loading="lazy" allowfullscreen
+                                allow="fullscreen; picture-in-picture"></iframe>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timbric Counterpoint -->
+            <section class="section">
+                <div class="code-card">
+                    <div class="code-card__header">
+                        <h2 class="code-card__name">Timbric Counterpoint (2018)</h2>
+                        <a href="https://github.com/sml-pereira/timbric-counterpoint" class="code-card__github" aria-label="GitHub repository for Timbric Counterpoint">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                        </a>
+                    </div>
+                    <span class="tag tag--tech">Pure Data</span>
+                    <span class="tag tag--tech">Sound Synthesis</span>
+                    <p class="code-card__desc">
+                        A Pure Data sound-synthesis patch that reinterprets J. S. Bach's <em>Invention No. 9 in F minor</em>, BWV 795 as a three-voice timbric counterpoint: each contrapuntal voice is rendered with a distinct synthesis technique, so the polyphony unfolds simultaneously in pitch-space and in timbre-space.
+                    </p>
+                    <div class="video-embed">
+                        <iframe src="https://player.vimeo.com/video/1180307052?dnt=1"
+                                title="Timbric Counterpoint &mdash; video demonstration"
+                                loading="lazy" allowfullscreen
+                                allow="fullscreen; picture-in-picture"></iframe>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Word Blackjack -->
+            <section class="section">
+                <div class="code-card">
+                    <div class="code-card__header">
+                        <h2 class="code-card__name">Word Blackjack (2017)</h2>
+                        <a href="https://github.com/sml-pereira/word-blackjack" class="code-card__github" aria-label="GitHub repository for Word Blackjack">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                        </a>
+                    </div>
+                    <span class="tag tag--tech">Python</span>
+                    <span class="tag tag--tech">Game</span>
+                    <p class="code-card__desc">
+                        <b>Like Blackjack, but the only thing you're gambling is your vocabulary</b>. Word Blackjack is a terminal-based multiplayer word game where players take turns saying words that connect to the previous by starting with the same letter, rhyming, or both. First to 21 points wins. No cards, no chips, just words and a healthy dose of competitive spirit. Proof that not everything has to be about Fourier transforms. A representative round, in which both players discover how much of the English language rhymes with <em>banana</em>:
+                    </p>
+                    <pre class="console-demo">B         Scores: 0 0
+Player 1 say a word or option (l/s/q): <b>banana</b>
+
+banana    Scores: 0 0
+Player 2 say a word or option (l/s/q): <b>bandana</b>
+
+bandana   Scores: 0 7
+Player 1 say a word or option (l/s/q): <b>iguana</b>
+
+iguana    Scores: 3 7
+Player 2 say a word or option (l/s/q): <b>nirvana</b>
+</pre>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-profiles">
+                <a href="https://orcid.org/0000-0003-2866-1081" target="_blank" rel="noopener noreferrer" aria-label="ORCID profile">
+                    <svg width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M32 16c0 8.837-7.163 16-16 16-8.838 0-16-7.163-16-16C0 7.162 7.162 0 16 0c8.837 0 16 7.162 16 16Z" fill="#A6CE39"/><path fill-rule="evenodd" clip-rule="evenodd" d="M18.813 9.637h-5.45v13.9h5.474c4.555 0 7.35-3.378 7.35-6.95 0-1.635-.562-3.372-1.77-4.704-1.215-1.336-3.065-2.246-5.605-2.246ZM18.6 21.3h-2.813v-9.425H18.5c1.823 0 3.12.552 3.96 1.4.842.849 1.252 2.021 1.252 3.312 0 .784-.239 1.967-.993 2.948-.745.969-2.01 1.765-4.119 1.765Zm5.311-4.026c-.251 1.74-1.494 4.276-5.311 4.276h-3.063H18.6c3.817 0 5.06-2.536 5.311-4.276Zm1.812-2.405c-.657-2.601-2.85-4.982-6.91-4.982h-5.2 5.2c4.06 0 6.253 2.38 6.91 4.982Zm.215 1.718ZM8.363 9.675v13.887h2.425V9.675H8.363Zm2.175 13.637H8.612h1.925ZM9.575 8.65c.84 0 1.513-.689 1.513-1.513 0-.823-.673-1.512-1.513-1.512-.838 0-1.512.674-1.512 1.513 0 .823.672 1.512 1.512 1.512Z" fill="#fff"/></svg>
+                </a>
+                <a href="https://scholar.google.com/citations?hl=en&amp;user=XiZDQLMAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar profile">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 512 512" aria-hidden="true"><path fill="#4285f4" d="M256 411.12L0 202.667 256 0z"/><path fill="#356ac3" d="M256 411.12l256-208.453L256 0z"/><circle fill="#a0c3ff" cx="256" cy="362.667" r="149.333"/><path fill="#76a7fa" d="M121.037 298.667c23.968-50.453 75.392-85.334 134.963-85.334s110.995 34.881 134.963 85.334H121.037z"/></svg>
+                </a>
+                <a href="https://www.cienciavitae.pt/portal/AC1E-D08A-2722" target="_blank" rel="noopener noreferrer" aria-label="CI&Ecirc;NCIAVITAE profile">
+                    <img src="assets/icons/cienciavitae.svg" alt="" aria-hidden="true" width="18" height="18">
+                </a>
+                <a href="https://github.com/sml-pereira" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+                    <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                </a>
+                <!-- PLACEHOLDER: Replace # with the LinkedIn profile URL -->
+                <a href="#" aria-label="LinkedIn profile">
+                    <img src="assets/icons/linkedin.svg" alt="" aria-hidden="true" width="18" height="18">
+                </a>
+            </div>
+            <p>&copy; <span class="copyright-year">2025</span> Samuel Pereira</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

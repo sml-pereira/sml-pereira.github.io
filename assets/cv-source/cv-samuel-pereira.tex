@@ -1,0 +1,585 @@
+%!TEX program = xelatex
+% ============================================================================
+%  ACADEMIC CV — Samuel Pereira
+%  Refined minimal design
+%  Compile with XeLaTeX
+% ============================================================================
+
+\documentclass[11pt, a4paper]{article}
+
+% ----------------------------------------------------------------------------
+%  GEOMETRY
+% ----------------------------------------------------------------------------
+\usepackage[
+    top=2.5cm,
+    bottom=2.5cm,
+    left=3.2cm,
+    right=2.4cm
+]{geometry}
+
+% ----------------------------------------------------------------------------
+%  TYPOGRAPHY
+%  Matched to the website: EB Garamond for body text, Inter for headings and
+%  UI-like accents. Both must be visible to XeLaTeX — installed system-wide, or
+%  present in TeX Live (see the fallback block below if either fails to load).
+% ----------------------------------------------------------------------------
+\usepackage{fontspec}
+\usepackage{microtype}
+
+% Body — the website's serif
+\setmainfont{EB Garamond}[
+    Scale = 1.1,
+    Ligatures = TeX
+]
+
+% Headings and accents — the website's sans
+\setsansfont{Inter}[
+    Scale = 1.1,
+    Ligatures = TeX
+]
+
+% Mono kept as-is; the website uses a Courier-class face for its console block,
+% so Latin Modern Mono is already close in character.
+\setmonofont{Latin Modern Mono}[
+    Scale = 0.95
+]
+
+% ----------------------------------------------------------------------------
+%  COLOUR — Restrained palette
+% ----------------------------------------------------------------------------
+\usepackage{xcolor}
+
+\definecolor{accent}{HTML}{1a1a2e}      % Deep navy-black for name
+\definecolor{secondary}{HTML}{4a4a5a}   % Warm grey for supporting text
+\definecolor{tertiary}{HTML}{7a7a8a}    % Mid grey for dates, DOIs
+\definecolor{quiet}{HTML}{9a9aa8}       % Quieter grey for page numbers
+\definecolor{rule}{HTML}{d4d4dc}        % Subtle rule colour
+\definecolor{link}{HTML}{3d5a7f}        % Warm blue for links
+\definecolor{accenthl}{HTML}{4a6fa5}    % Brighter blue — the heading rule's gradient
+
+% ----------------------------------------------------------------------------
+%  PACKAGES
+% ----------------------------------------------------------------------------
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    urlcolor=link,
+    linkcolor=link,
+    pdfauthor={Samuel Pereira},
+    pdftitle={Curriculum Vitae — Academic}
+}
+
+\usepackage{tikz}
+\usetikzlibrary{fadings}
+\usepackage{etoolbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{needspace}
+
+% ----------------------------------------------------------------------------
+%  SPACING SCALE — Harmonious proportions
+% ----------------------------------------------------------------------------
+\newlength{\spaceunit}
+\setlength{\spaceunit}{0.5em}
+
+\newlength{\spacetiny}
+\setlength{\spacetiny}{0.5\spaceunit}       % 0.25em — minimal gaps
+
+\newlength{\spacesmall}
+\setlength{\spacesmall}{1\spaceunit}        % 0.5em — within elements
+
+\newlength{\spacemedium}
+\setlength{\spacemedium}{2\spaceunit}       % 1em — between entries
+
+\newlength{\spacelarge}
+\setlength{\spacelarge}{3\spaceunit}        % 1.5em — after rules
+
+% ----------------------------------------------------------------------------
+%  VERTICAL RHYTHM — gaps are judged against the baseline, not in isolation
+%  With \linespread{1.22} the baseline is ~1.5x the type size, and that
+%  distance is added to every \vspace. A 0.5em gap inside an entry and a 1em
+%  gap between entries therefore differed by only ~1.25x once the baseline was
+%  counted, which is why entries did not read as separate. Shrinking the
+%  within-entry gaps and widening the between-entry one restores the contrast.
+% ----------------------------------------------------------------------------
+\newlength{\entrysep}
+\setlength{\entrysep}{1.75em}      % between entries
+\newlength{\subsecsep}
+% Deliberately the same length a section heading leaves above its first entry,
+% so "Education -> Degrees" opens exactly like "Academic and Research
+% Positions -> Assistant Professor". \cvsubsection applies it absolutely.
+\setlength{\subsecsep}{\spacesmall}
+\newlength{\secsep}
+\setlength{\secsep}{3em}           % above a section heading
+
+% ----------------------------------------------------------------------------
+%  UNIFIED DATE COLUMN — Consistent 2.4cm throughout
+% ----------------------------------------------------------------------------
+\newlength{\datewidth}
+\setlength{\datewidth}{2.4cm}
+
+% ----------------------------------------------------------------------------
+%  PAGE STYLE
+% ----------------------------------------------------------------------------
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+% 1.22 -> ~1.49x effective. The website runs 1.65x; this meets it partway,
+% since print convention is legitimately tighter than screen.
+\linespread{1.22}
+
+% Footer with page numbers
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[R]{\small\color{quiet}\thepage\,/\,\pageref{LastPage}}
+
+% First page style (no header, but keep footer)
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyfoot[R]{\small\color{quiet}\thepage\,/\,\pageref{LastPage}}
+}
+
+% ----------------------------------------------------------------------------
+%  PHOTO STYLING
+% ----------------------------------------------------------------------------
+\newlength{\photosize}
+\setlength{\photosize}{3.2cm}
+
+\newcommand{\cvphotocircle}[1]{%
+    \begin{tikzpicture}
+        \clip (0,0) circle (\photosize/2);
+        \node[anchor=center] at (0,0) {%
+            \includegraphics[width=\photosize]{#1}%
+        };
+    \end{tikzpicture}%
+}
+
+\newcommand{\cvphotoringed}[1]{%
+    \begin{tikzpicture}
+        \clip (0,0) circle (\photosize/2 - 0.6pt);
+        \node[anchor=center] at (0,0) {%
+            \includegraphics[width=\photosize]{#1}%
+        };
+        \draw[rule, line width=0.8pt] (0,0) circle (\photosize/2);
+    \end{tikzpicture}%
+}
+
+\newcommand{\cvphotorounded}[1]{%
+    \begin{tikzpicture}
+        \clip[rounded corners=2.5mm] (0,0) rectangle (\photosize, \photosize);
+        \node[anchor=south west, inner sep=0] at (0,0) {%
+            \includegraphics[width=\photosize]{#1}%
+        };
+    \end{tikzpicture}%
+}
+
+\newcommand{\cvphotosquare}[1]{%
+    \includegraphics[width=\photosize]{#1}%
+}
+
+% ----------------------------------------------------------------------------
+%  TYPE SCALE — ratios taken from the website, with body text as the unit
+%    h1 / name        1.74x      section heading   0.74x
+%    entry title      1.00x      supporting text   0.83x
+%    kind label       0.61x      tag chip          0.59x
+%  The site steps everything beneath a title down to a single 0.83x tier and
+%  holds it there — venue, description and date all share it.
+% ----------------------------------------------------------------------------
+\newcommand{\supporting}{\footnotesize}   % 9pt on 11pt body = 0.82x
+
+% ----------------------------------------------------------------------------
+%  CUSTOM COMMANDS
+% ----------------------------------------------------------------------------
+
+% Contact separator — lighter and more elegant
+\newcommand{\sep}{\hspace{0.35em}{\color{rule}·}\hspace{0.35em}}
+
+% Bulleted line inside an entry. Uses the same middle dot as \sep, but as a
+% list marker: \hangindent pulls every wrapped line in to the width of the
+% marker, so continuation text aligns under the text and not under the dot.
+% Takes no argument — it opens a paragraph that runs to the next \cvbullet.
+\newlength{\cvbulletindent}
+\setlength{\cvbulletindent}{0.95em}
+
+% The marker itself, defined once so the bullet and the subsection label carry
+% exactly the same dot. The box is sized in em, so the dot scales with whatever
+% type it sits beside.
+\newcommand{\cvdot}{\makebox[\cvbulletindent][l]{\color{rule}·}}
+
+\newcommand{\cvbullet}{%
+    \par\hangindent=\cvbulletindent\hangafter=1
+    \noindent\cvdot\ignorespaces
+}
+
+% Header with photo
+\newcommand{\makeheaderwithphoto}[5]{%
+    \noindent
+    \begin{minipage}[t]{\dimexpr\textwidth-\photosize-1cm\relax}
+        \vspace{0pt}%
+        {\fontsize{24}{24}\selectfont\sffamily\color{accent}#1}%
+        \par\vspace{\spacelarge}%
+        {\color{secondary}#2}%
+        \par\vspace{\spacelarge}%
+        {\supporting\color{tertiary}#3}%
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{\photosize}
+        \vspace{0pt}%
+        \raggedleft
+        \ifstrequal{#5}{circle}{\cvphotocircle{#4}}{%
+        \ifstrequal{#5}{ringed}{\cvphotoringed{#4}}{%
+        \ifstrequal{#5}{rounded}{\cvphotorounded{#4}}{%
+        \ifstrequal{#5}{square}{\cvphotosquare{#4}}{%
+            \cvphotocircle{#4}%
+        }}}}%
+    \end{minipage}%
+    \par\vspace{\spacelarge}%
+}
+
+% Header without photo
+\newcommand{\makeheader}[3]{%
+    {\fontsize{24}{24}\selectfont\sffamily\color{accent}#1}%
+    \par\vspace{\spacelarge}%
+    {\color{secondary}#2}%
+    \par\vspace{\spacelarge}%
+    {\supporting\color{tertiary}#3}%
+    \par\vspace{\spacelarge}%
+}
+
+% Tapered rule beneath the header block
+\newcommand{\headerrule}{%
+    \vspace{\spacetiny}%
+    \begin{tikzpicture}
+        \fill[rule] (0,0) -- (\textwidth,0) -- (\textwidth-0.3pt,-0.35pt) -- (0.3pt,-0.35pt) -- cycle;
+    \end{tikzpicture}%
+    \par\vspace{\spacelarge}%
+}
+
+% Section heading — matched to the website's h2
+%   colour   accent, not secondary
+%   tracking 0.12em (LetterSpace=12), twice the previous setting
+%   rule     accenthl fading to transparent, and only as wide as the heading
+%            text — on the site the underline is a block inside an inline-block
+%            h2, so it measures the words rather than a fixed fraction.
+%   The fleuron is gone; the website has no such ornament.
+\newsavebox{\cvsectionbox}
+\newcommand{\cvsection}[1]{%
+    \needspace{4\baselineskip}%  keeps a heading from being orphaned at a page foot
+    \vspace{\secsep}%
+    \sbox{\cvsectionbox}{\sffamily\scriptsize\addfontfeature{LetterSpace=12}\color{accent}\MakeUppercase{#1}}%
+    \usebox{\cvsectionbox}%
+    \par\vspace{3pt}%
+    \begin{tikzpicture}
+        \fill[accenthl, path fading=east] (0,0) rectangle (\wd\cvsectionbox, 0.4pt);
+    \end{tikzpicture}%
+    \par\vspace{\spacesmall}%
+}
+
+% Subsection — the website's "kind" label: small uppercase Inter in tertiary
+% with wide tracking, not the italic serif this used to be.
+% \removelastskip discards whatever vertical glue precedes the label — an
+% entry's \entrysep or a section heading's \spacesmall — so \subsecsep sets
+% the gap absolutely rather than adding to it. LaTeX has no margin collapsing,
+% so without this the same \subsecsep produced one gap under a heading and a
+% much larger one after entries. Every subsection label now opens at exactly
+% \spacesmall, whatever precedes it, and closes at \spacesmall too.
+\newcommand{\cvsubsection}[1]{%
+    \par\removelastskip
+    \vspace{\subsecsep}%
+    {\sffamily\fontsize{7}{9}\selectfont\addfontfeature{LetterSpace=10}%
+     \cvdot\color{tertiary}\MakeUppercase{#1}}%
+    \par\vspace{\spacesmall}%
+}
+
+% Standard entry: title, institution, date, description
+% Every field lives inside the left column, so nothing reflows underneath the
+% date gutter — the same structure \cventrycompact uses.
+\newcommand{\cventry}[4]{%
+    \noindent
+    \begin{minipage}[t]{\dimexpr\textwidth-\datewidth-0.4cm\relax}%
+        \vspace{0pt}%
+        {\color{accent}#1}%
+        \par\vspace{\spacetiny}%
+        {\supporting\color{secondary}#2}%
+        \ifstrempty{#4}{}{%
+            \par\vspace{\spacetiny}%
+            {\supporting\color{tertiary}#4}%
+        }%
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{\datewidth}%
+        \vspace{0pt}%
+        \raggedleft{\supporting\color{tertiary}\addfontfeature{Numbers=Lining}#3}%
+    \end{minipage}%
+    \par\vspace{\entrysep}%
+}
+
+% Compact entry for publications
+\newcommand{\cventrycompact}[3]{%
+    \noindent
+    \begin{minipage}[t]{\dimexpr\textwidth-\datewidth-0.4cm\relax}%
+        \vspace{0pt}%
+        {\color{accent}#1}%
+        \par\vspace{\spacetiny}%
+        {\supporting\color{secondary}#2}%
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{\datewidth}%
+        \vspace{0pt}%
+        \raggedleft{\supporting\color{tertiary}\addfontfeature{Numbers=Lining}#3}%
+    \end{minipage}%
+    \par\vspace{\entrysep}%
+}
+
+% Skill group
+\newcommand{\skillgroup}[2]{%
+    \noindent
+    \begin{minipage}[t]{\datewidth}%
+        \vspace{0pt}%
+        {\color{accent}#1}%
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{\dimexpr\textwidth-\datewidth-0.4cm\relax}%
+        \vspace{0pt}%
+        {\color{secondary}#2}%
+    \end{minipage}%
+    \par\vspace{\spacemedium}%
+}
+
+% Light emphasis for inline annotations
+\newcommand{\lightemph}[1]{{\color{tertiary}\itshape#1}}
+
+% ============================================================================
+%  DOCUMENT
+% ============================================================================
+\begin{document}
+\thispagestyle{firstpage}
+
+% The website sets body text to --secondary; without this every unwrapped
+% paragraph in the CV renders pure black, which is the single biggest reason
+% the page reads harder than the site.
+\color{secondary}
+
+% === HEADER WITH PHOTO ===
+% Uncomment below and comment the above if you prefer no photo
+% \makeheaderwithphoto
+%    {Samuel Pereira}
+%    {Music Theory\sep Computational Musicology\sep Corpus Studies}
+%    {Leça da Palmeira, Portugal\sep\href{mailto:sml.p@outlook.pt}{sml.p@outlook.pt}\sep\href{https://orcid.org/0000-0003-2866-1081}{ORCID}}
+%    {photo_placeholder}
+%    {ringed}
+
+% === HEADER WITHOUT PHOTO ===
+\makeheader
+    {Samuel Pereira}
+    {Music Theory\sep Computational Musicology}
+    {Matosinhos, Portugal\sep\href{tel:+351916199033}{+351 916199033}\sep\href{mailto:sml.p@outlook.pt}{sml.p@outlook.pt}\sep\href{https://sml-pereira.github.io}{Website}\sep\href{https://orcid.org/0000-0003-2866-1081}{ORCID}}
+
+\headerrule
+
+% === RESEARCH PROFILE ===
+I'm a researcher in music theory and computational musicology developing the Fourier Qualia Space, a novel framework applying discrete Fourier transforms to model harmonic-quality motion and ambiguity across four centuries of Western art music, with a special focus on post-tonal repertoires. My work combines quantitative analysis with music-theoretical enquiry, bridging computational methods and humanistic interpretation to understand how harmonic qualities convey hierarchical and syntactic organisation.
+
+% === ACADEMIC AND RESEARCH POSITIONS ===
+\cvsection{Academic and Research Positions}
+
+\cventry
+    {Assistant Professor}
+    {University of Coimbra}
+    {2026--}
+    {Teaching across two master's programmes in two faculties:
+    \cvbullet \emph{Computer Music and Sound Design}. Department of Informatics Engineering (DEI), Faculty of Sciences and Technology;
+    \cvbullet \emph{Art Studies}. Faculty of Arts and Humanities.}
+
+\cventry
+    {Researcher}
+    {Marie Skłodowska-Curie Actions (MSCA) Project ``EA-DIGIFOLK''}
+    {2023–2024}
+    {\cvbullet Project title: \href{https://doi.org/10.3030/101086338}{\emph{An European and Ibero-American approach for the digital collection, analysis and dissemination of folk music}.}
+    \cvbullet Provided expertise on computational approaches to musical similarity, with a special focus on folk music similarity perception. Completed two secondments at the University of Salamanca, Spain, contributing insights on how musicians conceptualise and perceive harmonic, melodic, rhythmic, textural, and formal relationships.}
+
+\cventry
+    {\href{https://www.inesctec.pt/pt/pessoas/samuel-filipe-silva}{External Student}}
+    {INESC TEC, Porto, Portugal}
+    {2021--}
+    {\cvbullet Conducting doctoral research on symbolic harmonic analysis using discrete Fourier transforms. Developed computational tools for large-scale corpus analysis and harmonic qualities visualisation. Contributed to research outputs including peer-reviewed publications on musical syntax and open-source software.}
+
+% === EDUCATION ===
+\cvsection{Education}
+
+\cvsubsection{Degrees}
+
+\cventry
+    {PhD in Digital Media}
+    {University of Porto, Faculty of Engineering (FEUP)}
+    {2021–2026}
+    {\cvbullet Thesis title: \textit{The Fourier Qualia Space: Interaction, Ambiguity, and Hierarchy in Music Harmony}
+    \cvbullet Supervisors: Prof.\ Gilberto Bernardes, Prof.\ José Oliveira Martins
+    \cvbullet Public defence: June 15th 2026
+    \cvbullet Approved by unanimity
+    \cvbullet Examination Committee: Dr. António Coelho, Dr. Martin Rohrmeier, Dr. Matt Chiu, Dr. Isabel Pires, Dr. Gilberto Bernardes, and Dr. António Sá Pinto}
+
+\cventry
+    {Master's in Multimedia}
+    {University of Porto, Faculty of Engineering (FEUP)}
+    {2018–2020}
+    {\cvbullet Dissertation title: \href{https://doi.org/10.34626/w4hp-0458}{\emph{The Atonal Harmonic Syntax in Fourier Space: Towards a Spherical Representation of Phases}}
+    \cvbullet Supervisor: Prof.\ Gilberto Bernardes
+    \cvbullet Final grade: 18/20}
+
+\cventry
+    {Bachelor's in Musical Composition}
+    {Escola Superior de Música e Artes do Espectáculo (ESMAE)}
+    {2014–2017}
+    {\cvbullet Final grade: 17/20}
+
+\cvsubsection{Certifications}
+
+\cventry
+    {Certificado de Competências Pedagógicas (CCP)}
+    {Escola de Negócios e Administração (ENA)}
+    {2021}
+    {\cvbullet Professional teaching certification for vocational training
+    \cvbullet Final grade: 5/5}
+
+% === GRANTS AND AWARDS ===
+\cvsection{Grants and Awards}
+
+\cventry
+    {Doctoral Grant}
+    {Fundação para a Ciência e a Tecnologia (FCT)}
+    {2021–2025}
+    {\cvbullet Project reference: 2021.05059.BD
+    \cvbullet Title: \href{https://doi.org/10.54499/2021.05059.BD}{\emph{Cartografias Harmónicas e a Conceptualização do Movimento Musical: Uma Sintaxe para a Música Atonal no Espaço de Fourier}}
+    \cvbullet Four-year funding for doctoral research in computational musicology, investigating whether post-tonal music possesses a coherent syntax in the unfolding of harmonic qualities (e.g., chromaticity, octatonicity, and diatonicity) over time.}
+
+% === PUBLICATIONS ===
+\cvsection{Publications}
+
+\cvsubsection{Journal Articles}
+
+\cventrycompact
+    {Pereira, Samuel, Gilberto Bernardes, and José Oliveira Martins. \emph{``Statistically Modelling Qualia Syntax Through Fourier Space: A Three-role Probabilistic Framework Where Ambiguity Becomes Structure''}}
+    {\textbf{Musicae Scientiae}}
+    {Forthcoming}
+
+\cventrycompact
+    {Pereira, Samuel, Gilberto Bernardes, and José Oliveira Martins. \href{https://doi.org/10.1093/mts/mtaf016}{\emph{``Qualia Motion in Fourier Space: Formalising Linear, Nondirected and Contrapuntal Ambiguity in Schoenberg's Op.\ 19, No.\ 1''}}}
+    {\textbf{Music Theory Spectrum} 48 (1).}
+    {2025}
+
+\cventrycompact
+    {Bernardes, Gilberto, Nádia Carvalho, and Samuel Pereira. \href{https://doi.org/10.1080/09298215.2023.2202641}{\emph{``FluidHarmony: Defining an Equal-Tempered and Hierarchical Harmonic Lexicon in the Fourier Space''}}}
+    {\textbf{Journal of New Music Research} 51 (2–3): 142–61.}
+    {2022}
+
+\cvsubsection{Book Chapters}
+
+\cventrycompact
+    {Pereira, Samuel, Giovanni Affatato, Gilberto Bernardes, and Fabian C.\ Moss. \href{https://doi.org/10.1007/978-3-031-60638-0\_25}{\emph{``Fourier Qualia Wavescapes: Hierarchical Analyses of Set Class Quality and Ambiguity''}}}
+    {In \textbf{Mathematics and Computation in Music}, ed.\ Thomas Noll et al.\ Springer.}
+    {2024}
+
+\cvsubsection{Software and Data}
+
+\cventrycompact
+    {Pereira, Samuel. \href{https://doi.org/10.5281/zenodo.19429566}{\emph{sml-pereira/phd-fqs: v1.0.1 — Repository Release}}}
+    {\textbf{Zenodo}.}
+    {2026}
+
+\cventrycompact
+    {Pereira, Samuel. \href{https://doi.org/10.5281/zenodo.19429590}{\emph{sml-pereira/qualia-syntax: v1.0.0 — Repository Release}}}
+    {\textbf{Zenodo}.}
+    {2026}
+
+\cvsubsection{Conference Papers in Proceedings}
+
+\cventrycompact
+    {Pereira, Samuel and Gilberto Bernardes. \href{https://musmat.org/conferences/2020/PereiraBernardes_MusMat5.pdf}{\emph{``The Fourier Phase Sphere: A Method for Computer-Assisted Atonal Composition''}}}
+    {\textbf{5th International Conference on Music and Mathematics (MusMat 2020)}, Perspectives and Applications of Mathematics in Post-tonal Theories («Homage to Jamary Oliveira»), online edition, pp.\ 40–54}
+    {2022}
+
+% === CONFERENCE PRESENTATIONS ===
+\cvsection{Conference Presentations}
+
+\cventrycompact
+    {\href{https://euromac11.sciencesconf.org/data/pages/Programme_daily_4.pdf}{\emph{``The Fourier Qualia Space: Interaction, Ambiguity, and Hierarchy in Music Harmony''}}}
+    {\textbf{EuroMAC 11: 11th European Music Analysis Conference}, Escola Superior de Música de Catalunya (ESMUC), Barcelona}
+    {Sept. 2026}
+
+\cventrycompact
+    {\href{https://echoes.fcsh.unl.pt/conference-programme/}{\emph{``Historical Evolution of Harmonic Qualities in Music: Unravelling Fourier's Tonality, Entropy, and Ambiguity from the 16th to the 20th Centuries''}}}
+    {\textbf{Digital Technologies Applied to Music Research Conference: Methodologies, Projects and Challenges}, Faculty of Social Sciences and Humanities – NOVA University, Lisbon}
+    {2024}
+
+\cventrycompact
+    {\href{https://www.uc.pt/site/assets/files/1724011/mcm_24_e-book.pdf}{\emph{``Fourier Qualia Wavescapes: Hierarchical Analyses of Set Class Quality and Ambiguity''}}}
+    {\textbf{9th International Congress on Mathematics and Computation in Music (MCM2024)}, Faculty of Arts and Humanities of the University of Coimbra, Coimbra}
+    {2024}
+
+\cventrycompact
+    {\href{https://doi.org/10.48528/gavx-3075}{\emph{``A Propósito da Representação do Movimento Musical: o Tonnetz e os Espaços de Fourier''}}}
+    {\textbf{XI ENIM – Encontro Nacional de Investigação em Música}, University of Aveiro, Aveiro.}
+    {2022}
+
+\cventrycompact
+    {\href{https://www.spimusica.pt/wp-content/uploads/2021/11/ENIM2021_Programa_e_Resumos.pdf}{\emph{``The Atonal Harmonic Syntax in Fourier's Space''}}}
+    {\textbf{X ENIM – Encontro Nacional de Investigação em Música}, Faculty of Arts and Humanities of the University of Coimbra, Coimbra}
+    {2021}
+
+\cventrycompact
+    {\emph{``Harmonic Cartographies and the Conceptualization of Musical Movement: A Syntax for Atonal Music in Fourier Space''}}
+    {\textbf{Reboot Fest 2021 – New Media and Digital Art Festival}, Porto}
+    {2021}
+
+\cventrycompact
+    {\href{https://musmat.org/conferences/2020/2020.html}{\emph{``The Fourier Phase Sphere: A Method for Computer-Assisted Atonal Composition''}}}
+    {\textbf{5th International Conference on Music and Mathematics (MusMat 2020)}, online}
+    {2020}
+
+% === EDITORIAL AND PEER REVIEW ===
+% Service, so it sits after the research outputs rather than above them.
+% "Reviews Editor" is the standard English term for Editor de Recensões; the
+% Portuguese is kept in parentheses. The role being unremunerated is
+% deliberately not stated — academic service is assumed to be.
+\cvsection{Editorial and Peer Review}
+
+\cventry
+    {Reviews Editor \lightemph{(Editor de Recensões)}}
+    {\href{http://rpm-ns.pt}{\emph{Revista Portuguesa de Musicologia}}\sep ISSN 2183-8410}
+    {2026--}
+    {\cvbullet Published in partnership by SPIM (Sociedade Portuguesa de Investigação em Música), INET-md (Instituto de Etnomusicologia — Centro de Estudos em Música e Dança), and CESEM (Centre for Music Studies).}
+
+% === TECHNICAL SKILLS ===
+\cvsection{Technical Skills}
+
+\skillgroup{Programming}{Python (\texttt{NumPy}, \texttt{SciPy}, \texttt{Pandas}, \texttt{Matplotlib}, \texttt{scikit-learn}, \texttt{Seaborn}, \texttt{tqdm}, \texttt{music21}), \LaTeX, Shell scripting}
+
+\skillgroup{Statistics}{Discrete Fourier transform analysis, PCA, $t$-SNE, hierarchical clustering, Markov chain analysis, $n$-gram modelling, entropy metrics, Zipf's law}
+
+\skillgroup{Data}{Large-scale corpus management, automated pipeline development, feature extraction}
+
+\skillgroup{Visualisation}{Publication-quality figures, heatmaps, dendrograms, wavescapes, interactive plots}
+
+\skillgroup{Tools}{Jupyter Notebook, Git, VS Code, Claude AI, Julius AI, Tableau, Jamovi, RAWGraphs, Overleaf, Zenodo, Office Suite, Sibelius, MuseScore, Pure Data, Max/MSP, Reaper}
+
+% === LANGUAGES ===
+\cvsection{Languages}
+
+Portuguese \lightemph{native}%
+\sep English \lightemph{fluent}%
+\sep Spanish \lightemph{reading proficiency}
+
+% === OTHER ACTIVITIES ===
+\cvsection{Other Activities}
+
+\cventry
+    {European Youth Parliament}
+    {\cvbullet National session delegate, Covilhã, Portugal.
+    \cvbullet International session delegate, Paris, France.}
+    {2005–2006}
+    {}
+
+\end{document}

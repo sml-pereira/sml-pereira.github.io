@@ -1,0 +1,1403 @@
+/* ============================================================================
+   ACADEMIC PORTFOLIO — Samuel Pereira
+   Colour palette and typographic rhythm derived from CV
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   CUSTOM PROPERTIES — CV colour palette
+   ---------------------------------------------------------------------------- */
+:root {
+    --accent: #1a1a2e;         /* Deep navy-black — name, headings */
+    --secondary: #4a4a5a;      /* Warm grey — body text */
+    --tertiary: #7a7a8a;       /* Mid grey — dates, metadata */
+    --quiet: #9a9aa8;          /* Quieter grey — subtle elements */
+    --rule: #d4d4dc;           /* Subtle rule colour */
+    --link: #3d5a7f;           /* Warm blue — hyperlinks */
+    --accent-highlight: #4a6fa5; /* Brighter blue — subtle identity highlight */
+    --bg: #ffffff;             /* Pure white background */
+    --bg-alt: #f4f4f6;         /* Slightly darker for alternating sections */
+    --white: #ffffff;
+
+    /* Typography scale (modular, ~1.2 ratio) */
+    --fs-sm: 0.82rem;
+    --fs-support: 0.95rem;     /* text supporting an entry title — two steps under --fs-base at every width */
+    --fs-base: 1.15rem;
+    --fs-md: 1.08rem;
+    --fs-lg: 1.2rem;
+    --fs-xl: 1.5rem;
+    --fs-2xl: 2.0rem;
+
+    /* Spacing scale. Every step is a distinct value: --sp-lg and --sp-xl were
+       both 2.5rem, which made rules that named different steps render
+       identically (notably two of the page-header spacing modifiers).
+       --sp-xl is raised rather than --sp-lg lowered: --sp-lg also sets the
+       container gutter and the nav's absolute offsets, which stay aligned with
+       each other precisely by sharing this token. */
+    --sp-xs: 0.25rem;
+    --sp-sm: 0.5rem;
+    --sp-md: 1rem;
+    /* Fills the 1rem -> 2.5rem canyon in the scale. Without a step here, a
+       heading that wants less air than an entry gap had nowhere to go and was
+       forced up onto --sp-xl, leaving it closer to the previous section than to
+       its own content. */
+    --sp-ml: 2rem;
+    --sp-lg: 2.5rem;
+    --sp-xl: 3rem;
+    --sp-2xl: 4rem;
+
+    /* Layout */
+    --max-width: 52rem;
+    --nav-height: 3rem;
+}
+
+/* ----------------------------------------------------------------------------
+   DARK MODE — colour overrides
+   ---------------------------------------------------------------------------- */
+[data-theme="dark"] {
+    --accent: #e4e4ec;
+    --secondary: #b0b0be;
+    --tertiary: #8a8a9a;
+    --quiet: #6a6a7a;
+    --rule: #3a3a4a;
+    --link: #7da4cc;
+    --accent-highlight: #6b9fd4;
+    --bg: #161616;
+    --bg-alt: #1c1c26;
+    --white: #1e1e28;
+}
+
+/* ----------------------------------------------------------------------------
+   RESET & BASE
+   ---------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: var(--fs-base);
+    line-height: 1.65;
+    color: var(--secondary);
+    background-color: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] {
+    color-scheme: dark;
+}
+
+/* Keyboard focus — the reset above removes the browser default outline */
+:focus-visible {
+    outline: 2px solid var(--accent-highlight);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+/* ----------------------------------------------------------------------------
+   TYPOGRAPHY
+   ---------------------------------------------------------------------------- */
+h1, h2, h3, h4 {
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    color: var(--accent);
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+h1 {
+    font-size: var(--fs-2xl);
+    letter-spacing: 0.01em;
+}
+
+h2 {
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    /* Half the gap above (which is the section's --sp-2xl), so the heading
+       reads as owning the content beneath it rather than floating midway
+       between two sections. Must stay below .entry margin-bottom, or a heading
+       sits further from its first item than two items sit from each other. */
+    margin-bottom: var(--sp-ml);
+    padding-bottom: var(--sp-xs);
+    border-bottom: none;
+    display: inline-block;
+}
+
+h2::after {
+    content: '';
+    display: block;
+    margin-top: var(--sp-xs);
+    height: 1px;
+    background: linear-gradient(to right, var(--accent-highlight), transparent);
+}
+
+h3 {
+    font-size: var(--fs-md);
+    color: var(--accent);
+    margin-bottom: var(--sp-sm);
+}
+
+h4 {
+    font-size: var(--fs-base);
+    font-style: italic;
+    color: var(--secondary);
+    margin-bottom: var(--sp-sm);
+}
+
+p {
+    margin-bottom: var(--sp-md);
+}
+
+a {
+    color: var(--link);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent);
+}
+
+/* Smooth link underline animation for body text links */
+main a {
+    text-decoration: none;
+    background-image: linear-gradient(var(--accent-highlight), var(--accent-highlight));
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    transition: background-size 0.3s ease, color 0.2s ease;
+}
+
+main a:hover {
+    background-size: 100% 1px;
+}
+
+em {
+    font-style: italic;
+}
+
+strong {
+    font-weight: 600;
+    color: var(--accent);
+}
+
+small, .meta {
+    font-size: var(--fs-sm);
+    color: var(--tertiary);
+}
+
+
+/* ----------------------------------------------------------------------------
+   LAYOUT
+   ---------------------------------------------------------------------------- */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--sp-lg);
+}
+
+main {
+    padding-top: calc(var(--nav-height) + var(--sp-2xl));
+    padding-bottom: var(--sp-2xl);
+    min-height: calc(100vh - 6rem);
+}
+
+/* Jumping to a section must not park it underneath the fixed bar */
+main [id] {
+    scroll-margin-top: calc(var(--nav-height) + var(--sp-md));
+}
+
+/* ----------------------------------------------------------------------------
+   NAVIGATION
+   ---------------------------------------------------------------------------- */
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-height);
+    background-color: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 100;
+    transition: background-color 0.3s ease;
+}
+
+.site-nav.scrolled {
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.site-nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* Wordmark — pinned to the left edge of the viewport, outside the content column */
+.site-nav__brand {
+    position: absolute;
+    left: var(--sp-lg);
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+    /* Override the main a underline animation */
+    background-image: none;
+}
+
+.site-nav__brand:hover {
+    color: var(--accent-highlight);
+}
+
+.site-nav__links {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    gap: var(--sp-lg);
+    list-style: none;
+}
+
+.site-nav__links a {
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--tertiary);
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1.5px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    /* Override the main a underline animation for nav links */
+    background-image: none;
+}
+
+.site-nav__links a:hover,
+.site-nav__links a.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent-highlight);
+}
+
+/* Mobile hamburger */
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--sp-sm);
+}
+
+.nav-toggle span {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background-color: var(--accent);
+    margin: 4px 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Theme toggle — pinned to the right edge of the viewport, outside the content column */
+.site-nav__toggle-item {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: var(--sp-lg);
+    top: 50%;
+    transform: translateY(calc(-50% + 2px));
+}
+
+.theme-toggle {
+    background-color: var(--accent);
+    border: none;
+    border-radius: 50%;
+    width: 11.5px;
+    height: 11.5px;
+    cursor: pointer;
+    display: block;
+    padding: 0;
+    flex-shrink: 0;
+    transition: background-color 0.3s ease, opacity 0.2s ease;
+    opacity: 0.6;
+}
+
+.theme-toggle:hover {
+    opacity: 1;
+}
+
+/* Dark mode — nav background overrides */
+[data-theme="dark"] .site-nav {
+    background-color: rgba(22, 22, 30, 0.88);
+}
+
+[data-theme="dark"] .site-nav.scrolled {
+    background-color: rgba(22, 22, 30, 0.95);
+}
+
+/* ----------------------------------------------------------------------------
+   HEADER / HERO — mirrors CV \makeheader
+   ---------------------------------------------------------------------------- */
+.page-header {
+    margin-bottom: var(--sp-2xl);
+}
+
+/* Pages whose introduction follows the trajectory directly, as on the home
+   page. Deliberately the same token the home band uses below itself, so the
+   two stay in step. Doubled class to outrank the mobile .page-header rule. */
+.page-header.page-header--tight {
+    margin-bottom: var(--sp-lg);
+}
+
+.page-header h1 {
+    /* On the interior pages this is the gap between the heading and the
+       trajectory beneath it; the home page zeroes it and spaces its band
+       from the canvas side instead */
+    margin-bottom: 1.5rem;
+}
+
+/* The trajectory always sits beneath its heading and takes the place a rule
+   would otherwise hold — full-bleed on the home page, the width of the text
+   column on every other one. The gap above it is the h1's own margin. */
+.trajectory-canvas {
+    display: block;
+    width: 100%;
+    cursor: default;
+}
+
+.trajectory-canvas--column {
+    height: 48px;
+}
+
+/* Home page — the canvas becomes a full-bleed band beneath the name */
+.page-header--band {
+    margin-bottom: 0;
+}
+
+.page-header--band h1 {
+    margin-bottom: 0;
+    text-align: center;
+}
+
+main > .trajectory-canvas--band {
+    height: 80px;
+    margin-top: var(--sp-lg);
+    margin-bottom: var(--sp-lg);
+    animation: fadeInUp 0.5s ease-out both;
+}
+
+/* ----------------------------------------------------------------------------
+   SECTIONS — mirrors CV \cvsection
+   ---------------------------------------------------------------------------- */
+.section {
+    margin-bottom: var(--sp-2xl);
+}
+
+.section:last-child {
+    margin-bottom: 0;
+}
+
+/* ----------------------------------------------------------------------------
+   ENTRY BLOCKS — mirrors CV \cventry
+   ---------------------------------------------------------------------------- */
+.entry {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--sp-md);
+    margin-bottom: var(--sp-lg);
+}
+
+.entry:last-child {
+    margin-bottom: 0;
+}
+
+.entry__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.entry__date {
+    flex-shrink: 0;
+    font-size: var(--fs-support);
+    color: var(--tertiary);
+    text-align: right;
+    font-variant-numeric: lining-nums;
+    /* Just wide enough for the longest date on the page ("2021-26", 52px at
+       this size), so every entry gets an identical body width and that width
+       is the widest the column can give it. */
+    min-width: 3.5rem;
+    /* The date's line box is shorter than the title's, so without this its
+       baseline would sit above the title it belongs to */
+    padding-top: 0.23em;
+}
+
+.entry__title {
+    font-size: var(--fs-base);
+    color: var(--accent);
+    /* 8px, not 4: below roughly a third of a line the gap stops reading as a
+       deliberate pairing and starts looking like two elements colliding. */
+    margin-bottom: var(--sp-sm);
+}
+
+/* Which kind of item this entry is, for sections that group more than one —
+   the two theses, for instance. Follows the small-label idiom used by the
+   spotlight card, but in the quieter metadata grey. */
+.entry__kind {
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tertiary);
+    margin-bottom: var(--sp-sm);
+}
+
+.entry__org {
+    font-size: var(--fs-support);
+    color: var(--secondary);
+    margin-bottom: var(--sp-sm);
+}
+
+.entry__desc {
+    font-size: var(--fs-support);
+    line-height: 1.6;
+}
+
+.entry__examiners-label {
+    margin-bottom: var(--sp-sm);
+}
+
+.entry__examiners {
+    font-size: var(--fs-support);
+    line-height: 1.6;
+    padding-left: 1.5em;
+    margin: 0;
+}
+
+.entry__examiners li {
+    margin-bottom: var(--sp-xs);
+}
+
+/* Entries put the title at the standard body size and set everything that
+   supports it — venue, abstract, description — one step down at --fs-support */
+
+/* Compact entry — for publications */
+.entry--compact {
+    margin-bottom: var(--sp-lg);
+}
+
+.entry--compact:last-child {
+    margin-bottom: 0;
+}
+
+.entry--compact .entry__title {
+    font-style: italic;
+    font-size: var(--fs-base);
+}
+
+.entry--compact .entry__venue {
+    font-size: var(--fs-support);
+    color: var(--secondary);
+}
+
+/* ----------------------------------------------------------------------------
+   CONTACT
+   ---------------------------------------------------------------------------- */
+/* No top margin: the h2 above owns the gap, as it does in every other section.
+   This margin existed to clear an introductory paragraph that no longer sits
+   between the heading and the list. */
+.contact-list {
+    margin-top: 0;
+}
+
+.contact-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-md);
+    padding: var(--sp-sm) 0;
+    border-bottom: 1px solid var(--rule);
+}
+
+.contact-row:last-child {
+    border-bottom: none;
+}
+
+.contact-row__label {
+    flex-shrink: 0;
+    min-width: 7rem;
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: var(--fs-sm);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--tertiary);
+}
+
+.contact-row__value {
+    font-size: var(--fs-md);
+}
+
+/* ----------------------------------------------------------------------------
+   FOOTER
+   ---------------------------------------------------------------------------- */
+.site-footer {
+    padding: var(--sp-lg) 0;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+}
+
+.site-footer p {
+    font-size: var(--fs-sm);
+    color: var(--quiet);
+    margin-bottom: 0;
+}
+
+/* Footer profile icon links */
+.footer-profiles {
+    display: flex;
+    justify-content: center;
+    gap: var(--sp-md);
+    margin-bottom: var(--sp-sm);
+}
+
+.footer-profiles a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    /* Override the main a underline animation for footer icons */
+    background-image: none;
+}
+
+.footer-profiles a:hover {
+    opacity: 1;
+}
+
+.footer-profiles svg,
+.footer-profiles img {
+    display: block;
+    width: 18px;
+    height: 18px;
+}
+
+/* Nav overlay — hidden on desktop */
+.site-nav__overlay {
+    display: none;
+}
+
+/* Body scroll lock when mobile nav is open */
+body.nav-open {
+    overflow: hidden;
+}
+
+/* ----------------------------------------------------------------------------
+   RESPONSIVE
+   ---------------------------------------------------------------------------- */
+/* Tablet — 768px and below */
+@media (max-width: 768px) {
+    :root {
+        --fs-2xl: 1.7rem;
+        --fs-xl: 1.3rem;
+        /* All three large steps shrink together. Shrinking only --sp-2xl (as
+           this block used to) flattened the section/entry ratio from 1.60 to
+           1.20 here and to 1.00 at 640, so groups stopped reading as groups
+           exactly where the single column needs them most. */
+        --sp-2xl: 3rem;
+        --sp-xl: 2.5rem;
+        --sp-lg: 2rem;
+        --sp-ml: 1.75rem;
+    }
+
+}
+
+/* Mobile — 640px and below */
+@media (max-width: 640px) {
+    :root {
+        --fs-2xl: 1.5rem;
+        --fs-xl: 1.15rem;
+        --fs-md: 0.92rem;
+        --sp-2xl: 2.5rem;
+        --sp-xl: 2rem;
+        --sp-lg: 1.75rem;
+        --sp-ml: 1.5rem;
+    }
+
+    html {
+        font-size: 15px;
+    }
+
+    .container {
+        padding: 0 var(--sp-md);
+    }
+
+    main {
+        padding-top: calc(var(--nav-height) + var(--sp-xl));
+        padding-bottom: var(--sp-xl);
+    }
+
+    /* Mobile nav */
+    .nav-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+        margin-right: calc(-1 * var(--sp-sm));
+    }
+
+    .site-nav .container {
+        justify-content: flex-start;
+    }
+
+    .site-nav__links {
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background-color: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: var(--sp-lg);
+        gap: var(--sp-md);
+        border-bottom: 1px solid var(--rule);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    [data-theme="dark"] .site-nav__links {
+        background-color: rgba(22, 22, 30, 0.97);
+    }
+
+    .site-nav__links.open {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .site-nav__links a {
+        font-size: var(--fs-sm);
+        padding: var(--sp-sm) 0;
+        display: block;
+    }
+
+    /* Mobile active-state styling — left border instead of bottom */
+    .site-nav__links a.active {
+        border-bottom: none;
+        border-left: 2px solid var(--accent-highlight);
+        padding-left: var(--sp-sm);
+        color: var(--accent);
+    }
+
+    /* Wordmark sits beside the hamburger rather than pinned to the viewport edge */
+    .site-nav__brand {
+        position: static;
+        transform: none;
+        margin-left: var(--sp-sm);
+    }
+
+    /* Restore inline placement of the theme toggle inside the mobile dropdown */
+    .site-nav__toggle-item {
+        position: static;
+        transform: translateY(2px);
+    }
+
+    /* Mobile overlay */
+    .site-nav__overlay {
+        display: block;
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(26, 26, 46, 0);
+        visibility: hidden;
+        transition: background-color 0.3s ease, visibility 0.3s ease;
+        z-index: 98;
+    }
+
+    .site-nav__overlay.open {
+        background-color: rgba(26, 26, 46, 0.08);
+        visibility: visible;
+    }
+
+    /* Hamburger animation */
+    .nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(3.5px, 3.5px);
+    }
+
+    .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(3.5px, -3.5px);
+    }
+
+    /* Stack entries vertically on mobile */
+    .entry {
+        flex-direction: column;
+        gap: var(--sp-xs);
+    }
+
+    .entry__date {
+        text-align: left;
+        min-width: unset;
+        padding-top: 0;
+    }
+
+    /* Page header */
+    .page-header {
+        margin-bottom: var(--sp-xl);
+    }
+
+    /* Sections. Must stay on --sp-2xl: h2 uses --sp-xl, so borrowing that token
+       here made the gap between two sections identical to the gap under a
+       heading, and sections stopped reading as groups. --sp-2xl already shrinks
+       at this breakpoint, so the step is smaller without being flattened. */
+    .section {
+        margin-bottom: var(--sp-2xl);
+    }
+
+    .contact-row,
+    .talk-meta__row {
+        flex-direction: column;
+        gap: var(--sp-xs);
+    }
+
+    .contact-row__label,
+    .talk-meta__label {
+        min-width: unset;
+    }
+
+    /* Trajectory canvas on mobile */
+    .trajectory-canvas--column {
+        height: 40px;
+    }
+}
+
+/* Small phones — 380px and below */
+@media (max-width: 380px) {
+    :root {
+        --fs-2xl: 1.3rem;
+        --fs-xl: 1.05rem;
+    }
+
+    .container {
+        padding: 0 var(--sp-sm);
+    }
+
+    h2 {
+        font-size: 0.78rem;
+        letter-spacing: 0.1em;
+    }
+}
+
+/* ----------------------------------------------------------------------------
+   PAGE TRANSITION ANIMATIONS
+   ---------------------------------------------------------------------------- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+main .container > .page-header {
+    animation: fadeInUp 0.5s ease-out both;
+}
+
+main .container > .section {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+}
+
+main .container > .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    main .container > .page-header {
+        animation: none;
+    }
+
+    main > .trajectory-canvas--band {
+        animation: none;
+    }
+
+    main .container > .section {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* ----------------------------------------------------------------------------
+   ARTICLE ABSTRACTS & LINKS
+   ---------------------------------------------------------------------------- */
+.entry__abstract {
+    font-size: var(--fs-support);
+    color: var(--tertiary);
+    margin-top: var(--sp-sm);
+    margin-bottom: var(--sp-sm);
+}
+
+.entry__links {
+    margin-top: var(--sp-sm);
+    margin-bottom: 0;
+}
+
+/* DOIs sit with the rest of an entry's metadata, not at body-text weight. */
+.entry__doi {
+    font-size: var(--fs-support);
+}
+
+/* Custom tooltip — fast appear, no system delay */
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 6px);
+    transform: translateX(-50%);
+    white-space: nowrap;
+    padding: 0.3em 0.6em;
+    border-radius: 3px;
+    background-color: var(--accent);
+    color: var(--bg);
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.15s ease 0.25s, visibility 0s linear 0.4s;
+    z-index: 100;
+}
+
+[data-tooltip]:hover::after,
+[data-tooltip]:focus-visible::after {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.15s ease 0.25s, visibility 0s linear 0.25s;
+}
+
+/* ----------------------------------------------------------------------------
+   DOWNLOAD LINKS
+   ---------------------------------------------------------------------------- */
+.download-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: var(--fs-sm);
+    letter-spacing: 0.02em;
+    color: var(--link);
+    transition: color 0.2s ease;
+}
+
+.download-link:hover {
+    color: var(--accent);
+}
+
+.download-icon {
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+/* Multiple download links in a row */
+.composition-card__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-sm) var(--sp-lg);
+    margin-bottom: var(--sp-md);
+}
+
+/* ----------------------------------------------------------------------------
+   SECTION NAV (in-page anchor links)
+   ---------------------------------------------------------------------------- */
+/* In-page contents. It follows the introduction and leads into the sections it
+   lists, so it takes a full section break above (the intro's own margin) and a
+   shorter one below, keeping it visibly tied to the content that follows. */
+.section-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-sm) var(--sp-lg);
+    margin-bottom: var(--sp-xl);
+}
+
+/* Each entry carries a standing underline so the row reads as a set of
+   separate, clickable items before the cursor ever reaches it, and echoes the
+   rule under the h2 headings these links point at */
+.section-nav a {
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: var(--fs-sm);
+    letter-spacing: 0.04em;
+    color: var(--link);
+    padding: 4px 0 6px;
+    border-bottom: 1px solid var(--rule);
+    /* the body-link underline animation would double up with the border */
+    background-image: none;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.section-nav a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent-highlight);
+}
+
+/* ----------------------------------------------------------------------------
+   SPOTLIGHT CARD (Home — latest work)
+   ---------------------------------------------------------------------------- */
+/* No margin-top: h2 is display:inline-block, so its bottom margin never
+   collapses with a following sibling's top margin — the two would add up and
+   this card would sit further from its heading than every other page's first
+   element does. The h2's own margin is the entire gap. */
+.spotlight-card {
+    border-left: 2px solid var(--accent-highlight);
+    padding-left: var(--sp-lg);
+}
+
+.spotlight-card__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: var(--sp-md);
+}
+
+/* Identity filter + transition so the dark-mode inversion below fades over the same 0.3s as the
+   body's background-color/color transition, instead of snapping while the page eases around it.
+   The identity list must be spelled out here (rather than relying on `filter: none`) so the two
+   values have matching function lists and interpolate in both directions — into dark and back out. */
+.invert-on-dark {
+    filter: invert(0) hue-rotate(0deg) contrast(1);
+    transition: filter 0.3s ease;
+}
+
+/* Opt-in: invert lightness in dark mode (use for diagrams with white backgrounds; omit for photos).
+   The invert on its own drives the diagram's paper white down to pure #000, which reads as a hard
+   black rectangle against the page. contrast() pivots around mid-grey, so it pulls both ends of
+   the range inwards: paper white lands on rgb(22, 22, 22) — the --bg of the dark theme — and the
+   inked strokes settle at rgb(232, 232, 232), near --accent, instead of a glaring pure white.
+   The amount is 1 - 2 * (22/255) ≈ 0.825; recompute it if --bg changes. */
+[data-theme="dark"] .invert-on-dark {
+    filter: invert(1) hue-rotate(180deg) contrast(0.825);
+}
+
+.spotlight-card__label {
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-highlight);
+    margin-bottom: var(--sp-sm);
+}
+
+.spotlight-card__title {
+    font-size: var(--fs-lg);
+    color: var(--accent);
+    margin-bottom: var(--sp-sm);
+    font-style: italic;
+}
+
+.spotlight-card__desc {
+    font-size: var(--fs-base);
+    margin-bottom: var(--sp-sm);
+}
+
+.spotlight-card__link {
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: var(--fs-sm);
+    letter-spacing: 0.02em;
+}
+
+/* ----------------------------------------------------------------------------
+   TALK META (Home — next talk)
+   ---------------------------------------------------------------------------- */
+/* Label/value rows for a single upcoming engagement. Deliberately lighter than
+   .contact-row — no rule between rows — because it sits inside a spotlight card
+   whose left border already holds the group together. */
+.talk-meta {
+    margin-bottom: var(--sp-sm);
+}
+
+.talk-meta__row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-md);
+    padding: var(--sp-xs) 0;
+}
+
+/* Matches .spotlight-card__label so the two label styles on this page agree. */
+.talk-meta__label {
+    flex-shrink: 0;
+    min-width: 5rem;
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tertiary);
+}
+
+.talk-meta__value {
+    font-size: var(--fs-support);
+    color: var(--secondary);
+}
+
+/* ----------------------------------------------------------------------------
+   COMPOSITION CARDS
+   ---------------------------------------------------------------------------- */
+/* No padding of its own: the section's bottom margin is the single
+   source of vertical rhythm here, as it is on every other page */
+.composition-card {
+    padding: 0;
+}
+
+.composition-card h2 {
+    margin-bottom: var(--sp-sm);
+}
+
+.composition-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-xs);
+    margin-bottom: var(--sp-md);
+}
+
+.composition-card__note {
+    margin-bottom: var(--sp-md);
+}
+
+/* ----------------------------------------------------------------------------
+   TAGS (instrumentation, tech)
+   ---------------------------------------------------------------------------- */
+.tag {
+    display: inline-block;
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--tertiary);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 0.15em 0.55em;
+    line-height: 1.4;
+}
+
+.tag--tech {
+    color: var(--link);
+    border-color: var(--link);
+    opacity: 0.8;
+}
+
+/* ----------------------------------------------------------------------------
+   MEDIA PLACEHOLDER (video/audio forthcoming)
+   ---------------------------------------------------------------------------- */
+.media-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-sm);
+    padding: var(--sp-lg) var(--sp-md);
+    margin-top: var(--sp-md);
+    border: 1px dashed var(--rule);
+    border-radius: 4px;
+    background-color: var(--bg-alt);
+    color: var(--quiet);
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: var(--fs-sm);
+    letter-spacing: 0.02em;
+}
+
+.media-placeholder__icon {
+    opacity: 0.5;
+    flex-shrink: 0;
+}
+
+/* ----------------------------------------------------------------------------
+   CONSOLE TRANSCRIPT
+   ---------------------------------------------------------------------------- */
+/* A verbatim snippet of a terminal program. Shares the surface treatment of
+   .media-placeholder and .video-embed so every kind of demo sits in the same
+   frame. Column alignment matters here, so the monospace stack and the
+   horizontal scroll are both load-bearing: the text must never reflow. */
+.console-demo {
+    margin-top: var(--sp-md);
+    padding: var(--sp-md);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background-color: var(--bg-alt);
+    color: var(--tertiary);
+    font-family: "Courier New", ui-monospace, monospace;
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+    overflow-x: auto;
+}
+
+/* Whatever the player typed, against the program's own output. */
+.console-demo b {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* ----------------------------------------------------------------------------
+   VIDEO EMBED
+   ---------------------------------------------------------------------------- */
+/* Responsive 16:9 frame: the box holds the ratio at any width and the iframe
+   fills it, so an embed never overflows its card on a narrow screen. Shares the
+   surface treatment of .media-placeholder, which it replaces once a video
+   exists. */
+.video-embed {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    margin-top: var(--sp-md);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: var(--bg-alt);
+}
+
+.video-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* ----------------------------------------------------------------------------
+   AUDIO PLAYER
+   ---------------------------------------------------------------------------- */
+.audio-player {
+    margin-top: var(--sp-md);
+}
+
+.audio-player audio {
+    width: 100%;
+    max-width: 28rem;
+    border-radius: 4px;
+}
+
+.audio-player__note {
+    font-size: var(--fs-sm);
+    color: var(--quiet);
+    margin-top: var(--sp-xs);
+}
+
+/* ----------------------------------------------------------------------------
+   CODE CARDS
+   ---------------------------------------------------------------------------- */
+/* No padding of its own: the section's bottom margin is the single
+   source of vertical rhythm here, as it is on every other page */
+.code-card {
+    padding: 0;
+}
+
+/* Ordinary inline flow rather than a flex row: the heading keeps the line box
+   every other h2 on the site sits on, so this page shares their vertical
+   rhythm, and the icon aligns to the text rather than being centred on the
+   heading's box — which includes the underline below it, and was dropping the
+   icon low. */
+.code-card__header {
+    margin-bottom: var(--sp-sm);
+}
+
+.code-card__header h2 {
+    margin-bottom: 0;
+    margin-right: var(--sp-sm);
+}
+
+.code-card__name {
+    font-family: "Inter", "Courier New", monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+}
+
+.code-card__github {
+    display: inline-block;
+    line-height: 0;
+    /* Matched to the heading so the em below is measured against the heading's
+       size. The icon is 16px, so lifting its baseline by half the cap height
+       less half the icon centres it on the capitals rather than hanging it
+       below them. */
+    font-size: 0.85rem;
+    vertical-align: calc(0.364em - 8px);
+    color: var(--tertiary);
+    opacity: 0.7;
+    transition: opacity 0.2s ease, color 0.2s ease;
+    background-image: none;
+}
+
+.code-card__github:hover {
+    opacity: 1;
+    color: var(--accent);
+    background-image: none;
+}
+
+/* margin-bottom is 0 by design: whatever follows declares its own top margin,
+   so the gap is chosen rather than being whichever of two collapsing margins
+   happened to be larger. Metadata takes the small step, a media block the
+   larger one. */
+.code-card__desc {
+    margin-top: var(--sp-sm);
+    margin-bottom: 0;
+}
+
+.code-card__status {
+    font-size: var(--fs-sm);
+    color: var(--quiet);
+    margin-top: var(--sp-sm);
+}
+
+/* ----------------------------------------------------------------------------
+   PHOTO PLACEHOLDER (About page)
+   ---------------------------------------------------------------------------- */
+/* Portrait-proportioned (4:5), sitting on the column's left edge like every
+   other element on the page. The 4px radius is the same one .media-placeholder,
+   .video-embed and .console-demo use, so an empty photo frame reads as part of
+   the same family. */
+.photo-placeholder {
+    width: 200px;
+    height: 250px;
+    max-width: 100%;
+    border-radius: 4px;
+    background-color: var(--bg-alt);
+    border: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 0 0 var(--sp-md);
+}
+
+/* Photo and introduction as one block: the face and the summary are read
+   together, and the text fills the space beside the portrait rather than
+   leaving it empty. Stacks below 640px, where two columns would squeeze the
+   text past a comfortable measure. */
+.photo-intro {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-lg);
+}
+
+.photo-intro .photo-placeholder {
+    flex-shrink: 0;
+    margin-bottom: 0;
+}
+
+/* min-width:0 so a long unbroken string can't push the column wider than its
+   share of the row. */
+.photo-intro__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.photo-intro__body > p:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+    .photo-intro {
+        display: block;
+    }
+
+    .photo-intro .photo-placeholder {
+        margin-bottom: var(--sp-md);
+    }
+}
+
+/* Once a real photo lands in the frame, it fills it without distorting. */
+.photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.photo-placeholder__initials {
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: var(--fs-2xl);
+    font-weight: 400;
+    color: var(--quiet);
+    letter-spacing: 0.05em;
+}
+
+/* ----------------------------------------------------------------------------
+   RESPONSIVE — new components
+   ---------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+    .section-nav {
+        gap: var(--sp-xs) var(--sp-md);
+    }
+
+    .composition-card__links {
+        flex-direction: column;
+        gap: var(--sp-xs);
+    }
+
+    /* The transcript's longest line is 44 characters; trimming the type and the
+       side padding lets it land inside a 375px screen without a scrollbar. It
+       still scrolls if it has to. */
+    .console-demo {
+        padding: var(--sp-md) var(--sp-sm);
+        font-size: 0.72rem;
+    }
+}
+
+/* ----------------------------------------------------------------------------
+   PRINT
+   ---------------------------------------------------------------------------- */
+@media print {
+    .site-nav,
+    .site-footer,
+    .trajectory-canvas,
+    .theme-toggle {
+        display: none;
+    }
+
+    main {
+        padding-top: 0;
+    }
+
+    body {
+        font-size: 11pt;
+        color: #000;
+    }
+
+    a {
+        color: #000;
+        text-decoration: underline;
+    }
+}
