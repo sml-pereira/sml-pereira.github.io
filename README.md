@@ -32,17 +32,6 @@ Light and dark themes are driven by a `data-theme` attribute on `<html>`, with
 the reader's preference kept in `localStorage` and the system setting honoured
 on first visit. Responsive breakpoints sit at 768px, 640px and 380px.
 
-## Running it locally
-
-Any static file server will do:
-
-```bash
-python3 -m http.server 8000
-```
-
-Then open <http://localhost:8000>. Pushing to `main` redeploys through GitHub
-Pages, normally within a minute.
-
 ## The CV
 
 `assets/cv-samuel-pereira.pdf` is compiled from
