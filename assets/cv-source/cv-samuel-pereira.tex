@@ -108,7 +108,7 @@
 \newlength{\subsecsep}
 % Deliberately the same length a section heading leaves above its first entry,
 % so "Education -> Degrees" opens exactly like "Academic and Research
-% Positions -> Assistant Professor". \cvsubsection applies it absolutely.
+% Positions -> Invited Assistant Professor". \cvsubsection applies it absolutely.
 \setlength{\subsecsep}{\spacesmall}
 \newlength{\secsep}
 \setlength{\secsep}{3em}           % above a section heading
@@ -367,15 +367,20 @@
 % \makeheaderwithphoto
 %    {Samuel Pereira}
 %    {Music Theory\sep Computational Musicology\sep Corpus Studies}
-%    {Leça da Palmeira, Portugal\sep\href{mailto:sml.p@outlook.pt}{sml.p@outlook.pt}\sep\href{https://orcid.org/0000-0003-2866-1081}{ORCID}}
+%    {Leça da Palmeira, Portugal\sep\href{mailto:samuel.pereira@uc.pt}{samuel.pereira@uc.pt}\sep\href{https://orcid.org/0000-0003-2866-1081}{ORCID}}
 %    {photo_placeholder}
 %    {ringed}
 
 % === HEADER WITHOUT PHOTO ===
+% The "Website" and "LinkedIn" links previously both pointed at the ORCID URL.
+% Website now points at the site; LinkedIn is omitted until a profile URL is
+% available — add it back as \sep\href{<url>}{LinkedIn} when you have one.
 \makeheader
     {Samuel Pereira}
-    {Music Theory\sep Computational Musicology}
-    {Matosinhos, Portugal\sep\href{tel:+351916199033}{+351 916199033}\sep\href{mailto:sml.p@outlook.pt}{sml.p@outlook.pt}\sep\href{https://sml-pereira.github.io}{Website}\sep\href{https://orcid.org/0000-0003-2866-1081}{ORCID}}
+    {Music Theory\sep Musical Analysis\sep Computational Musicology}
+    {4450-615 Leça da Palmeira, Portugal\\
+    \href{mailto:samuel.pereira@uc.pt}{samuel.pereira@uc.pt}\sep\href{tel:+351916199033}{+351 916 199 033}\\
+    \href{https://sml-pereira.github.io}{Website}\sep\href{https://orcid.org/0000-0003-2866-1081}{ORCID}\sep\href{https://www.cienciavitae.pt/portal/AC1E-D08A-2722}{CIÊNCIA ID}\sep\href{https://github.com/sml-pereira}{GitHub}}
 
 \headerrule
 
@@ -386,25 +391,28 @@ I'm a researcher in music theory and computational musicology developing the Fou
 \cvsection{Academic and Research Positions}
 
 \cventry
-    {Assistant Professor}
-    {University of Coimbra}
+    {Invited Assistant Professor \lightemph{(Professor Auxiliar Convidado)}}
+    {University of Coimbra, Faculty of Arts and Humanities\\
+    Department of History, European Studies, Archaeology and Arts}
     {2026--}
-    {Teaching across two master's programmes in two faculties:
-    \cvbullet \emph{Computer Music and Sound Design}. Department of Informatics Engineering (DEI), Faculty of Sciences and Technology;
-    \cvbullet \emph{Art Studies}. Faculty of Arts and Humanities.}
+    {-- Scientific area: Musical Studies. Fixed-term contract in public functions, part-time (20\,\%), 09/2026--02/2027, renewable under Article 293 of the LTFP.\\
+    -- Teaching in the master's programmes in \emph{Computer Music and Sound Design} and \emph{Art Studies}.}
 
 \cventry
-    {Researcher}
-    {Marie Skłodowska-Curie Actions (MSCA) Project ``EA-DIGIFOLK''}
-    {2023–2024}
-    {\cvbullet Project title: \href{https://doi.org/10.3030/101086338}{\emph{An European and Ibero-American approach for the digital collection, analysis and dissemination of folk music}.}
-    \cvbullet Provided expertise on computational approaches to musical similarity, with a special focus on folk music similarity perception. Completed two secondments at the University of Salamanca, Spain, contributing insights on how musicians conceptualise and perceive harmonic, melodic, rhythmic, textural, and formal relationships.}
+    {Seconded Researcher}
+    {Marie Skłodowska-Curie Actions Staff Exchanges ``EA-DIGIFOLK'', grant agreement 101086338}
+    {2024}
+    {-- Project: \href{https://doi.org/10.3030/101086338}{\emph{A European and Ibero-American Approach for the Digital Collection, Analysis and Dissemination of Folk Music}} (2023--2026), coordinated by the University of Salamanca, with partners in Portugal (INESC TEC and the University of Coimbra), Spain and Ireland.\\
+    -- Seconded from INESC TEC for two periods at the University of Salamanca: 24 March--16 April and 17 August--15 September 2024.\\
+    -- Designed a survey and interviews with professors of the Salamanca Conservatory to assess and quantify how musicians perceive similarity in melody, harmony, rhythm, form, texture and text.}
 
 \cventry
-    {\href{https://www.inesctec.pt/pt/pessoas/samuel-filipe-silva}{External Student}}
-    {INESC TEC, Porto, Portugal}
-    {2021--}
-    {\cvbullet Conducting doctoral research on symbolic harmonic analysis using discrete Fourier transforms. Developed computational tools for large-scale corpus analysis and harmonic qualities visualisation. Contributed to research outputs including peer-reviewed publications on musical syntax and open-source software.}
+    {\href{https://www.inesctec.pt/pt/pessoas/samuel-filipe-silva}{Doctoral Researcher}}
+    {INESC TEC, Sound and Music Computing Lab\\
+    Faculty of Engineering, University of Porto (FEUP)}
+    {2021--2025}
+    {-- Held under FCT doctoral studentship 2021.05059.BD, full time, 1 October 2021--30 September 2025.\\
+    -- Conducted doctoral research on symbolic harmonic analysis using discrete Fourier transforms. Developed computational tools for large-scale corpus analysis and harmonic-quality visualisation, with outputs including peer-reviewed publications on musical syntax and open-source software.}
 
 % === EDUCATION ===
 \cvsection{Education}
@@ -414,26 +422,26 @@ I'm a researcher in music theory and computational musicology developing the Fou
 \cventry
     {PhD in Digital Media}
     {University of Porto, Faculty of Engineering (FEUP)}
-    {2021–2026}
-    {\cvbullet Thesis title: \textit{The Fourier Qualia Space: Interaction, Ambiguity, and Hierarchy in Music Harmony}
-    \cvbullet Supervisors: Prof.\ Gilberto Bernardes, Prof.\ José Oliveira Martins
-    \cvbullet Public defence: June 15th 2026
-    \cvbullet Approved by unanimity
-    \cvbullet Examination Committee: Dr. António Coelho, Dr. Martin Rohrmeier, Dr. Matt Chiu, Dr. Isabel Pires, Dr. Gilberto Bernardes, and Dr. António Sá Pinto}
+    {2021--2026}
+    {-- Thesis: \href{https://hdl.handle.net/10216/175411}{\textit{The Fourier Qualia Space: Interaction, Ambiguity, and Hierarchy in Music Harmony}}\\
+    -- Supervisors: Prof.\ Gilberto Bernardes, Prof.\ José Oliveira Martins\\
+    -- Public defence: 15 June 2026. Approved by unanimity.\\
+    -- Examination committee: Dr.\ António Coelho, Dr.\ Martin Rohrmeier (École Polytechnique Fédérale de Lausanne), Dr.\ Matt Chiu (Baldwin Wallace University), Dr.\ Isabel Pires (NOVA University Lisbon), Dr.\ Gilberto Bernardes, and Dr.\ António Sá Pinto}
 
 \cventry
-    {Master's in Multimedia}
+    {MSc in Multimedia}
     {University of Porto, Faculty of Engineering (FEUP)}
-    {2018–2020}
-    {\cvbullet Dissertation title: \href{https://doi.org/10.34626/w4hp-0458}{\emph{The Atonal Harmonic Syntax in Fourier Space: Towards a Spherical Representation of Phases}}
-    \cvbullet Supervisor: Prof.\ Gilberto Bernardes
-    \cvbullet Final grade: 18/20}
+    {2017--2020}
+    {-- Dissertation: \href{https://doi.org/10.34626/w4hp-0458}{\emph{A Sintaxe Harmónica Atonal no Espaço de Fourier: Para Uma Representação Esférica das Fases}}\\
+    -- Specialisation in interactive music and sound design\\
+    -- Supervisor: Prof.\ Gilberto Bernardes\\
+    -- Final grade: 18/20}
 
 \cventry
-    {Bachelor's in Musical Composition}
-    {Escola Superior de Música e Artes do Espectáculo (ESMAE)}
-    {2014–2017}
-    {\cvbullet Final grade: 17/20}
+    {BA in Musical Composition}
+    {Escola Superior de Música e Artes do Espectáculo (ESMAE), Polytechnic of Porto}
+    {2014--2017}
+    {-- Final grade: 17/20}
 
 \cvsubsection{Certifications}
 
@@ -441,19 +449,20 @@ I'm a researcher in music theory and computational musicology developing the Fou
     {Certificado de Competências Pedagógicas (CCP)}
     {Escola de Negócios e Administração (ENA)}
     {2021}
-    {\cvbullet Professional teaching certification for vocational training
-    \cvbullet Final grade: 5/5}
+    {-- Professional teaching certification for vocational training\\
+    -- Final grade: 5/5}
 
 % === GRANTS AND AWARDS ===
 \cvsection{Grants and Awards}
 
 \cventry
-    {Doctoral Grant}
+    {Doctoral Studentship}
     {Fundação para a Ciência e a Tecnologia (FCT)}
-    {2021–2025}
-    {\cvbullet Project reference: 2021.05059.BD
-    \cvbullet Title: \href{https://doi.org/10.54499/2021.05059.BD}{\emph{Cartografias Harmónicas e a Conceptualização do Movimento Musical: Uma Sintaxe para a Música Atonal no Espaço de Fourier}}
-    \cvbullet Four-year funding for doctoral research in computational musicology, investigating whether post-tonal music possesses a coherent syntax in the unfolding of harmonic qualities (e.g., chromaticity, octatonicity, and diatonicity) over time.}
+    {2021--2025}
+    {-- Reference: 2021.05059.BD\\
+    -- Title: \href{https://doi.org/10.54499/2021.05059.BD}{\emph{Cartografias Harmónicas e a Conceptualização do Movimento Musical: Uma Sintaxe para a Música Atonal no Espaço de Fourier}}\\
+    -- 48 months of funding awarded in a national competitive call, 1 October 2021--30 September 2025, hosted by FEUP and INESC TEC (Sound and Music Computing Lab).\\
+    -- Doctoral research in computational musicology, investigating whether post-tonal music possesses a coherent syntax in the unfolding of harmonic qualities (e.g., chromaticity, octatonicity, and diatonicity) over time.}
 
 % === PUBLICATIONS ===
 \cvsection{Publications}
@@ -461,82 +470,104 @@ I'm a researcher in music theory and computational musicology developing the Fou
 \cvsubsection{Journal Articles}
 
 \cventrycompact
-    {Pereira, Samuel, Gilberto Bernardes, and José Oliveira Martins. \emph{``Statistically Modelling Qualia Syntax Through Fourier Space: A Three-role Probabilistic Framework Where Ambiguity Becomes Structure''}}
-    {\textbf{Musicae Scientiae}}
-    {Forthcoming}
-
-\cventrycompact
-    {Pereira, Samuel, Gilberto Bernardes, and José Oliveira Martins. \href{https://doi.org/10.1093/mts/mtaf016}{\emph{``Qualia Motion in Fourier Space: Formalising Linear, Nondirected and Contrapuntal Ambiguity in Schoenberg's Op.\ 19, No.\ 1''}}}
-    {\textbf{Music Theory Spectrum} 48 (1).}
-    {2025}
+    {Pereira, Samuel, Gilberto Bernardes, and José Oliveira Martins. \href{https://doi.org/10.1093/mts/mtaf016}{\emph{``Qualia Motion in Fourier Space: Formalizing Linear, Nondirected and Contrapuntal Ambiguity in Schoenberg's Op.\ 19, No.\ 1''}}}
+    {\textbf{Music Theory Spectrum} 48 (1): 126--51. Published online 17 December 2025.}
+    {2026}
 
 \cventrycompact
     {Bernardes, Gilberto, Nádia Carvalho, and Samuel Pereira. \href{https://doi.org/10.1080/09298215.2023.2202641}{\emph{``FluidHarmony: Defining an Equal-Tempered and Hierarchical Harmonic Lexicon in the Fourier Space''}}}
-    {\textbf{Journal of New Music Research} 51 (2–3): 142–61.}
+    {\textbf{Journal of New Music Research} 51 (2--3): 142--61. Open access.}
     {2022}
 
-\cvsubsection{Book Chapters}
+\cvsubsection{Under Review}
+
+\cventrycompact
+    {Pereira, Samuel, Gilberto Bernardes, and José Oliveira Martins. \emph{``Statistically Modelling Qualia Syntax Through Fourier Space: A Three-role Probabilistic Framework Where Ambiguity Becomes Structure''}}
+    {Manuscript submitted to \textbf{Musicae Scientiae} (SAGE), August 2026; awaiting peer review.}
+    {2026}
+
+\cvsubsection{Chapters in Peer-Reviewed Proceedings}
 
 \cventrycompact
     {Pereira, Samuel, Giovanni Affatato, Gilberto Bernardes, and Fabian C.\ Moss. \href{https://doi.org/10.1007/978-3-031-60638-0\_25}{\emph{``Fourier Qualia Wavescapes: Hierarchical Analyses of Set Class Quality and Ambiguity''}}}
-    {In \textbf{Mathematics and Computation in Music}, ed.\ Thomas Noll et al.\ Springer.}
+    {In \textbf{Mathematics and Computation in Music: 9th International Conference, MCM 2024}, ed.\ Thomas Noll et al., 317--29. Lecture Notes in Computer Science 14639. Cham: Springer.}
     {2024}
+
+\cventrycompact
+    {Pereira, Samuel, and Gilberto Bernardes. \href{https://musmat.org/conferences/2020/PereiraBernardes_MusMat5.pdf}{\emph{``The Fourier Phase Sphere: A Method for Computer-Assisted Atonal Composition''}}}
+    {In \textbf{Anais do V Congresso Internacional de Música e Matemática: Homenagem a Jamary Oliveira}, 40--54. Rio de Janeiro: Universidade Federal do Rio de Janeiro, Escola de Música. ISSN 2594-9128. Presented online in 2020.}
+    {2022}
+
+\cvsubsection{Doctoral Thesis}
+
+\cventrycompact
+    {Pereira, Samuel. \href{https://hdl.handle.net/10216/175411}{\emph{``The Fourier Qualia Space: Interaction, Ambiguity, and Hierarchy in Music Harmony''}}}
+    {PhD diss., \textbf{University of Porto}. Open access from 14 December 2026.}
+    {2026}
 
 \cvsubsection{Software and Data}
 
 \cventrycompact
+    {Affatato, Giovanni, Samuel Pereira, Gilberto Bernardes, and Fabian C.\ Moss. \href{https://dcmlab.github.io/midiVERTO/}{\emph{Qualia module of the midiVERTO web application}}}
+    {Web tool of the Digital and Cognitive Musicology Lab, \textbf{École Polytechnique Fédérale de Lausanne}. Qualia trajectories and wavescapes through the Fourier Qualia Space.}
+    {2023}
+
+\cventrycompact
     {Pereira, Samuel. \href{https://doi.org/10.5281/zenodo.19429566}{\emph{sml-pereira/phd-fqs: v1.0.1 — Repository Release}}}
-    {\textbf{Zenodo}.}
+    {\textbf{Zenodo}. Code and data of the doctoral thesis. Code under MIT; data under CC BY 4.0.}
     {2026}
 
 \cventrycompact
     {Pereira, Samuel. \href{https://doi.org/10.5281/zenodo.19429590}{\emph{sml-pereira/qualia-syntax: v1.0.0 — Repository Release}}}
-    {\textbf{Zenodo}.}
+    {\textbf{Zenodo}. Code, data and robustness tests of the manuscript under review. Code under MIT; data under CC BY 4.0.}
     {2026}
-
-\cvsubsection{Conference Papers in Proceedings}
-
-\cventrycompact
-    {Pereira, Samuel and Gilberto Bernardes. \href{https://musmat.org/conferences/2020/PereiraBernardes_MusMat5.pdf}{\emph{``The Fourier Phase Sphere: A Method for Computer-Assisted Atonal Composition''}}}
-    {\textbf{5th International Conference on Music and Mathematics (MusMat 2020)}, Perspectives and Applications of Mathematics in Post-tonal Theories («Homage to Jamary Oliveira»), online edition, pp.\ 40–54}
-    {2022}
 
 % === CONFERENCE PRESENTATIONS ===
 \cvsection{Conference Presentations}
 
 \cventrycompact
+    {\href{https://www.spimusica.pt/wp-content/uploads/2026/11/EnIM-XV_Livro-de-Resumos-Programa.pdf}{\emph{``Tonfeld Theory and the Discrete Fourier Transform: A Bridge Between Hermeneutic and Mathematical Accounts of Extended Tonality''}}}
+    {\textbf{EnIM 26: XV Encontro de Investigação em Música} (SPIM), Royal Building of Mafra, Mafra, 4--6 November.}
+    {2026}
+
+\cventrycompact
     {\href{https://euromac11.sciencesconf.org/data/pages/Programme_daily_4.pdf}{\emph{``The Fourier Qualia Space: Interaction, Ambiguity, and Hierarchy in Music Harmony''}}}
-    {\textbf{EuroMAC 11: 11th European Music Analysis Conference}, Escola Superior de Música de Catalunya (ESMUC), Barcelona}
-    {Sept. 2026}
+    {\textbf{EuroMAC 11: 11th European Music Analysis Conference}, Escola Superior de Música de Catalunya (ESMUC), Barcelona, 7--10 September.}
+    {2026}
+
+\cventrycompact
+    {\href{https://www.uc.pt/en/ceis20/conferences/colloquium-series-music-as-interdiscipline/}{\emph{``Qualia Motion in Fourier Space: Formalising Linear, Nondirected and Contrapuntal Ambiguity in Schoenberg's Op.\ 19, No.\ 1''}} \lightemph{(invited talk)}}
+    {\textbf{CEIS20 Colloquium ``Music as Interdiscipline''}, University of Coimbra, Coimbra, 24 September.}
+    {2025}
 
 \cventrycompact
     {\href{https://echoes.fcsh.unl.pt/conference-programme/}{\emph{``Historical Evolution of Harmonic Qualities in Music: Unravelling Fourier's Tonality, Entropy, and Ambiguity from the 16th to the 20th Centuries''}}}
-    {\textbf{Digital Technologies Applied to Music Research Conference: Methodologies, Projects and Challenges}, Faculty of Social Sciences and Humanities – NOVA University, Lisbon}
+    {\textbf{Digital Technologies Applied to Music Research: Methodologies, Projects and Challenges}, NOVA FCSH, Lisbon, 27--29 June.}
     {2024}
 
 \cventrycompact
     {\href{https://www.uc.pt/site/assets/files/1724011/mcm_24_e-book.pdf}{\emph{``Fourier Qualia Wavescapes: Hierarchical Analyses of Set Class Quality and Ambiguity''}}}
-    {\textbf{9th International Congress on Mathematics and Computation in Music (MCM2024)}, Faculty of Arts and Humanities of the University of Coimbra, Coimbra}
+    {\textbf{MCM 2024: 9th International Congress on Mathematics and Computation in Music}, University of Coimbra, Coimbra, 18--21 June. With G.\ Affatato, G.\ Bernardes and F.\ C.\ Moss.}
     {2024}
 
 \cventrycompact
-    {\href{https://doi.org/10.48528/gavx-3075}{\emph{``A Propósito da Representação do Movimento Musical: o Tonnetz e os Espaços de Fourier''}}}
-    {\textbf{XI ENIM – Encontro Nacional de Investigação em Música}, University of Aveiro, Aveiro.}
+    {\href{https://doi.org/10.48528/gavx-3075}{\emph{``A Propósito da Representação Geométrica do Movimento Musical: o Tonnetz e os Espaços de Fourier''}}}
+    {\textbf{EnIM 22: XI Encontro de Investigação em Música} (SPIM), Department of Communication and Art, University of Aveiro, Aveiro, 10--12 November.}
     {2022}
 
 \cventrycompact
     {\href{https://www.spimusica.pt/wp-content/uploads/2021/11/ENIM2021_Programa_e_Resumos.pdf}{\emph{``The Atonal Harmonic Syntax in Fourier's Space''}}}
-    {\textbf{X ENIM – Encontro Nacional de Investigação em Música}, Faculty of Arts and Humanities of the University of Coimbra, Coimbra}
+    {\textbf{EnIM 21: X Encontro de Investigação em Música} (SPIM), University of Coimbra, Coimbra, 11--13 November. With Gilberto Bernardes.}
     {2021}
 
 \cventrycompact
-    {\emph{``Harmonic Cartographies and the Conceptualization of Musical Movement: A Syntax for Atonal Music in Fourier Space''}}
-    {\textbf{Reboot Fest 2021 – New Media and Digital Art Festival}, Porto}
+    {\emph{``Harmonic Cartographies and the Conceptualisation of Musical Movement: A Syntax for Atonal Music in Fourier Space''}}
+    {\textbf{DMDS 2021/22: Digital Media Doctoral Symposium}, University of Porto, Porto, 9 November.}
     {2021}
 
 \cventrycompact
     {\href{https://musmat.org/conferences/2020/2020.html}{\emph{``The Fourier Phase Sphere: A Method for Computer-Assisted Atonal Composition''}}}
-    {\textbf{5th International Conference on Music and Mathematics (MusMat 2020)}, online}
+    {\textbf{MusMat 2020: 5th International Conference on Music and Mathematics}, online.}
     {2020}
 
 % === EDITORIAL AND PEER REVIEW ===
@@ -548,28 +579,48 @@ I'm a researcher in music theory and computational musicology developing the Fou
 
 \cventry
     {Reviews Editor \lightemph{(Editor de Recensões)}}
-    {\href{http://rpm-ns.pt}{\emph{Revista Portuguesa de Musicologia}}\sep ISSN 2183-8410}
+    {\href{http://rpm-ns.pt}{\emph{Revista Portuguesa de Musicologia}}, nova série\sep ISSN 2183-8410}
     {2026--}
-    {\cvbullet Published in partnership by SPIM (Sociedade Portuguesa de Investigação em Música), INET-md (Instituto de Etnomusicologia — Centro de Estudos em Música e Dança), and CESEM (Centre for Music Studies).}
+    {-- Since September 2026. Commissioning, editing and scheduling reviews of books, CDs, concerts, digital musicology corpora, and software.\\
+    -- Published in partnership by SPIM (Sociedade Portuguesa de Investigação em Música), INET-md (Instituto de Etnomusicologia — Centro de Estudos em Música e Dança), and CESEM (Centre for Music Studies).}
+
+% === RESEARCH UNITS AND MEMBERSHIPS ===
+\cvsection{Research Units and Memberships}
+
+\cventry
+    {Member}
+    {INESC TEC, Centre for Telecommunications and Multimedia\sep Sound and Music Computing Lab}
+    {2021--}
+    {}
+
+\cventry
+    {Member}
+    {Sociedade Portuguesa de Investigação em Música (SPIM)}
+    {2021--}
+    {}
 
 % === TECHNICAL SKILLS ===
 \cvsection{Technical Skills}
 
-\skillgroup{Programming}{Python (\texttt{NumPy}, \texttt{SciPy}, \texttt{Pandas}, \texttt{Matplotlib}, \texttt{scikit-learn}, \texttt{Seaborn}, \texttt{tqdm}, \texttt{music21}), \LaTeX, Shell scripting}
+\skillgroup{Programming}{Python\sep \LaTeX\sep Shell scripting\sep Git}
 
-\skillgroup{Statistics}{Discrete Fourier transform analysis, PCA, $t$-SNE, hierarchical clustering, Markov chain analysis, $n$-gram modelling, entropy metrics, Zipf's law}
+\skillgroup{Packages}{\texttt{NumPy}\sep \texttt{SciPy}\sep \texttt{Pandas}\sep \texttt{Matplotlib}\sep \texttt{scikit-learn}\sep \texttt{Seaborn}\sep \texttt{tqdm}\sep \texttt{music21}}
 
-\skillgroup{Data}{Large-scale corpus management, automated pipeline development, feature extraction}
+\skillgroup{Quantitative}{Discrete Fourier transform analysis\sep PCA\sep $t$-SNE\sep Hierarchical clustering\sep Markov chain analysis\sep $n$-gram modelling\sep Entropy metrics\sep Zipf's law}
 
-\skillgroup{Visualisation}{Publication-quality figures, heatmaps, dendrograms, wavescapes, interactive plots}
+\skillgroup{Analytical}{Pitch-class set theory\sep Transformational and neo-Riemannian theory\sep Schenkerian analysis}
 
-\skillgroup{Tools}{Jupyter Notebook, Git, VS Code, Claude AI, Julius AI, Tableau, Jamovi, RAWGraphs, Overleaf, Zenodo, Office Suite, Sibelius, MuseScore, Pure Data, Max/MSP, Reaper}
+\skillgroup{Corpora}{Symbolic encodings (MusicXML, MIDI)\sep Large symbolic corpora\sep Automated analysis pipelines\sep Feature extraction\sep Open publication of code and data (GitHub, Zenodo)}
+
+\skillgroup{Visualisation}{Publication-quality figures\sep RadViz projections\sep \emph{Wavescapes}\sep Dendrograms\sep Heatmaps\sep Interactive plots}
+
+\skillgroup{Tools}{Jupyter Notebook\sep VS Code\sep Overleaf\sep Tableau\sep Jamovi\sep RAWGraphs\sep Office Suite\sep Sibelius\sep MuseScore\sep Pure Data\sep Max/MSP\sep Reaper}
 
 % === LANGUAGES ===
 \cvsection{Languages}
 
 Portuguese \lightemph{native}%
-\sep English \lightemph{fluent}%
+\sep English \lightemph{C1}%
 \sep Spanish \lightemph{reading proficiency}
 
 % === OTHER ACTIVITIES ===
@@ -577,9 +628,9 @@ Portuguese \lightemph{native}%
 
 \cventry
     {European Youth Parliament}
-    {\cvbullet National session delegate, Covilhã, Portugal.
-    \cvbullet International session delegate, Paris, France.}
-    {2005–2006}
+    {-- National session delegate, Covilhã, Portugal.\\
+    -- International session delegate, Paris, France.}
+    {2005--2006}
     {}
 
 \end{document}
