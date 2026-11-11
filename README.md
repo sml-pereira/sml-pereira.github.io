@@ -8,8 +8,7 @@ them.
 
 ## Structure
 
-Static HTML, CSS and JavaScript. No frameworks, no build step, no dependencies —
-the files served are the files in this repository.
+Static HTML, CSS and JavaScript. No frameworks, no build step, no dependencies (the files served are the files in this repository).
 
 ```
 index.html              home
@@ -31,14 +30,6 @@ manifest.json           web app manifest
 Light and dark themes are driven by a `data-theme` attribute on `<html>`, with
 the reader's preference kept in `localStorage` and the system setting honoured
 on first visit. Responsive breakpoints sit at 768px, 640px and 380px.
-
-## The CV
-
-`assets/cv-samuel-pereira.pdf` is compiled from
-`assets/cv-source/cv-samuel-pereira.tex` with XeLaTeX. The source calls for
-EB Garamond and Inter by name, so both typefaces must be visible to the TeX
-installation — on a machine without them, the compile stops at a missing-font
-error rather than substituting.
 
 ## Colophon
 
