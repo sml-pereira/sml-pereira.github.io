@@ -872,6 +872,79 @@ main .container > .section.visible {
     margin-bottom: 0;
 }
 
+/* Talk abstracts — a button at the start of the links row opens the abstract
+   below it. It borrows the download-link idiom so the two read as a pair of
+   the entry's actions. */
+.entry__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-xs) var(--sp-ml);
+}
+
+.abstract-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: var(--fs-sm);
+    letter-spacing: 0.02em;
+    line-height: inherit;
+    color: var(--link);
+    transition: color 0.2s ease;
+}
+
+.abstract-toggle:hover {
+    color: var(--accent);
+}
+
+.abstract-toggle__icon {
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.abstract-toggle[aria-expanded="true"] .abstract-toggle__icon {
+    transform: rotate(90deg);
+}
+
+.entry__abstract-text {
+    margin-top: var(--sp-sm);
+    padding-left: var(--sp-md);
+    border-left: 1px solid var(--rule);
+}
+
+.entry__abstract-text p {
+    font-size: var(--fs-support);
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0;
+}
+
+.entry__abstract-text p + p {
+    margin-top: var(--sp-sm);
+}
+
+/* Marks where the English translation begins in a bilingual abstract.
+   Same small-label idiom as .entry__kind. */
+.entry__abstract-text .entry__abstract-lang {
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tertiary);
+    margin-top: var(--sp-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .abstract-toggle__icon {
+        transition: none;
+    }
+}
+
 /* DOIs sit with the rest of an entry's metadata, not at body-text weight. */
 .entry__doi {
     font-size: var(--fs-support);

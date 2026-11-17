@@ -664,6 +664,17 @@
         link.setAttribute('rel', 'noopener noreferrer');
     });
 
+    // --- Talk abstracts: each button shows or hides the panel it controls ---
+    document.querySelectorAll('.abstract-toggle').forEach(function (btn) {
+        var panel = document.getElementById(btn.getAttribute('aria-controls'));
+        if (!panel) return;
+        btn.addEventListener('click', function () {
+            var open = btn.getAttribute('aria-expanded') !== 'true';
+            btn.setAttribute('aria-expanded', String(open));
+            panel.hidden = !open;
+        });
+    });
+
     // --- Dynamic copyright year ---
     var yearEl = document.querySelector('.copyright-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
